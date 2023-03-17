@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Kali环境中安装Docker的详细步骤</title>
+    <url>/2023/03/16/2023-03-16-dockerdownload/</url>
+    <content><![CDATA[<h1 id="以下是在Kali环境中安装Docker的详细步骤："><a href="#以下是在Kali环境中安装Docker的详细步骤：" class="headerlink" title="以下是在Kali环境中安装Docker的详细步骤："></a>以下是在Kali环境中安装Docker的详细步骤：</h1><h2 id="1-修改源"><a href="#1-修改源" class="headerlink" title="1. 修改源"></a>1. 修改源</h2><p>打开终端，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>找到文件中的所有原始并将其替换为中科大的源，请将以下两行添加到文件的末尾：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
+
+<p>按CTRL+X，然后按Y保存更改。</p>
+<h2 id="2-安装Docker"><a href="#2-安装Docker" class="headerlink" title="2. 安装Docker"></a>2. 安装Docker</h2><p>在终端中运行以下命令来安装Docker：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install docker.io</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-检查是否安装完成"><a href="#3-检查是否安装完成" class="headerlink" title="3. 检查是否安装完成"></a>3. 检查是否安装完成</h2><p>运行以下命令检查Docker是否正确安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker --version</span><br></pre></td></tr></table></figure>
+
+<p>如果一切正常，您应该看到Docker的版本信息。</p>
+<h2 id="4-Docker源加速"><a href="#4-Docker源加速" class="headerlink" title="4. Docker源加速"></a>4. Docker源加速</h2><p>为了加快Docker镜像的下载速度，我们可以使用一个国内镜像站点。创建文件&#x2F;etc&#x2F;docker&#x2F;daemon.json：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<p>写入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按CTRL+ X，然后按Y保存更改。</p>
+<p>重启Docker以使更改生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-准备容器镜像"><a href="#5-准备容器镜像" class="headerlink" title="5. 准备容器镜像"></a>5. 准备容器镜像</h2><p>在教程过程中会用到多个容器镜像，因此需要提前下载这些镜像。</p>
+<h3 id="5-1-漏洞环境"><a href="#5-1-漏洞环境" class="headerlink" title="5.1 漏洞环境"></a>5.1 漏洞环境</h3><p>运行以下命令来获取漏洞环境的Docker镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull area39/pikachu:latest</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-AWVS扫描器"><a href="#5-2-AWVS扫描器" class="headerlink" title="5.2 AWVS扫描器"></a>5.2 AWVS扫描器</h3><p>运行以下命令来获取AWVS扫描器的Docker镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull secfa/docker-awvs</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-Nessus扫描器"><a href="#5-3-Nessus扫描器" class="headerlink" title="5.3 Nessus扫描器"></a>5.3 Nessus扫描器</h3><p>运行以下命令来获取Nessus扫描器的Docker镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull registry.cn-hangzhou.aliyuncs.com/steinven/nessus:v0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-启动需要的项目"><a href="#5-4-启动需要的项目" class="headerlink" title="5.4 启动需要的项目"></a>5.4 启动需要的项目</h3><p>TIP：第三个目前不需要启动，上午的课题只需要启动前两个即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 启动pikachu</span><br><span class="line">sudo docker run -dit -p 80:80 area39/pikachu:latest</span><br><span class="line"># 启动AWVS扫描器</span><br><span class="line">sudo docker run -dit -p 3443:3443 secfa/docker-awvs</span><br><span class="line"># Nessus扫描器</span><br><span class="line">sudo docker run -rm -p 8834:8834 registry.cn-hangzhou.aliyuncs.com/steinven/nessus:v0.1 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>现在您已经成功地在Kali环境中安装了Docker，并准备好使用所需的容器镜像。</p>
+]]></content>
+      <tags>
+        <tag>Web课程笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>创建公司文件共享体系方案</title>
     <url>/2022/10/28/fx1/</url>
     <content><![CDATA[<h3 id="项目设计要求"><a href="#项目设计要求" class="headerlink" title="项目设计要求"></a>项目设计要求</h3><h4 id="数据可朔源"><a href="#数据可朔源" class="headerlink" title="数据可朔源"></a>数据可朔源</h4><ul>
@@ -78,52 +124,6 @@
       </categories>
       <tags>
         <tag>资源分享</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kali环境中安装Docker的详细步骤</title>
-    <url>/2023/03/16/2023-03-16-dockerdownload/</url>
-    <content><![CDATA[<h1 id="以下是在Kali环境中安装Docker的详细步骤："><a href="#以下是在Kali环境中安装Docker的详细步骤：" class="headerlink" title="以下是在Kali环境中安装Docker的详细步骤："></a>以下是在Kali环境中安装Docker的详细步骤：</h1><h2 id="1-修改源"><a href="#1-修改源" class="headerlink" title="1. 修改源"></a>1. 修改源</h2><p>打开终端，输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-
-<p>找到文件中的所有原始并将其替换为中科大的源，请将以下两行添加到文件的末尾：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
-
-<p>按CTRL+X，然后按Y保存更改。</p>
-<h2 id="2-安装Docker"><a href="#2-安装Docker" class="headerlink" title="2. 安装Docker"></a>2. 安装Docker</h2><p>在终端中运行以下命令来安装Docker：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install docker.io</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-检查是否安装完成"><a href="#3-检查是否安装完成" class="headerlink" title="3. 检查是否安装完成"></a>3. 检查是否安装完成</h2><p>运行以下命令检查Docker是否正确安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker --version</span><br></pre></td></tr></table></figure>
-
-<p>如果一切正常，您应该看到Docker的版本信息。</p>
-<h2 id="4-Docker源加速"><a href="#4-Docker源加速" class="headerlink" title="4. Docker源加速"></a>4. Docker源加速</h2><p>为了加快Docker镜像的下载速度，我们可以使用一个国内镜像站点。创建文件&#x2F;etc&#x2F;docker&#x2F;daemon.json：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nano /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
-
-<p>写入以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>按CTRL+ X，然后按Y保存更改。</p>
-<p>重启Docker以使更改生效：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-准备容器镜像"><a href="#5-准备容器镜像" class="headerlink" title="5. 准备容器镜像"></a>5. 准备容器镜像</h2><p>在教程过程中会用到多个容器镜像，因此需要提前下载这些镜像。</p>
-<h3 id="5-1-漏洞环境"><a href="#5-1-漏洞环境" class="headerlink" title="5.1 漏洞环境"></a>5.1 漏洞环境</h3><p>运行以下命令来获取漏洞环境的Docker镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull area39/pikachu:latest</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-2-AWVS扫描器"><a href="#5-2-AWVS扫描器" class="headerlink" title="5.2 AWVS扫描器"></a>5.2 AWVS扫描器</h3><p>运行以下命令来获取AWVS扫描器的Docker镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull secfa/docker-awvs</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-3-Nessus扫描器"><a href="#5-3-Nessus扫描器" class="headerlink" title="5.3 Nessus扫描器"></a>5.3 Nessus扫描器</h3><p>运行以下命令来获取Nessus扫描器的Docker镜像：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull registry.cn-hangzhou.aliyuncs.com/steinven/nessus:v0.1</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-4-启动需要的项目"><a href="#5-4-启动需要的项目" class="headerlink" title="5.4 启动需要的项目"></a>5.4 启动需要的项目</h3><p>TIP：第三个目前不需要启动，上午的课题只需要启动前两个即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 启动pikachu</span><br><span class="line">sudo docker run -dit -p 80:80 area39/pikachu:latest</span><br><span class="line"># 启动AWVS扫描器</span><br><span class="line">sudo docker run -dit -p 3443:3443 secfa/docker-awvs</span><br><span class="line"># Nessus扫描器</span><br><span class="line">sudo docker run -rm -p 8834:8834 registry.cn-hangzhou.aliyuncs.com/steinven/nessus:v0.1 &amp;</span><br></pre></td></tr></table></figure>
-
-<p>现在您已经成功地在Kali环境中安装了Docker，并准备好使用所需的容器镜像。</p>
-]]></content>
-      <tags>
-        <tag>Web课程笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -249,26 +249,6 @@
       </tags>
   </entry>
   <entry>
-    <title>HTTP基本认证</title>
-    <url>/2023/03/07/web3/</url>
-    <content><![CDATA[<h2 id="步骤一：抓取靶机的包"><a href="#步骤一：抓取靶机的包" class="headerlink" title="步骤一：抓取靶机的包"></a>步骤一：抓取靶机的包</h2><p>在输入过密码的前提下，使用Burp Suite抓取靶机的包，以便进行后续的密码爆破测试。</p>
-<h2 id="步骤二：找到正确的包后，发送给测试器进行密码爆破"><a href="#步骤二：找到正确的包后，发送给测试器进行密码爆破" class="headerlink" title="步骤二：找到正确的包后，发送给测试器进行密码爆破"></a>步骤二：找到正确的包后，发送给测试器进行密码爆破</h2><p>在找到正确的包后，将其发送给密码爆破测试器，进行后续的测试。</p>
-<h2 id="步骤三：在测试器中添加§前缀"><a href="#步骤三：在测试器中添加§前缀" class="headerlink" title="步骤三：在测试器中添加§前缀"></a>步骤三：在测试器中添加§前缀</h2><p>在测试器中，选取<code>Authorization: Basic YWRtaW46MTIzNA==</code>字段，并选中<code>YWRtaW46MTIzNA==</code>，然后点击右侧的<code>添加§</code>按钮，使其变成<code>Authorization: Basic §YWRtaW46MTIzNA==§</code>的格式。这样做是为了告诉程序需要对这个位置进行密码爆破测试，以便找到正确的密码。</p>
-<h2 id="步骤四：解码验证"><a href="#步骤四：解码验证" class="headerlink" title="步骤四：解码验证"></a>步骤四：解码验证</h2><p>由于<code>YWRtaW46MTIzNA==</code>使用<code>Basic</code>进行解码后得到<code>admin:1234</code>，从而得知密码格式是<code>user:password</code>。</p>
-<h2 id="步骤五：在有效载荷中添加前缀admin"><a href="#步骤五：在有效载荷中添加前缀admin" class="headerlink" title="步骤五：在有效载荷中添加前缀admin:"></a>步骤五：在有效载荷中添加前缀admin:</h2><p>为了进行密码爆破，需要在有效载荷中添加前缀<code>admin:</code>，以便对密码进行猜测。</p>
-<h2 id="步骤六：对前缀admin-进行Base64编码处理"><a href="#步骤六：对前缀admin-进行Base64编码处理" class="headerlink" title="步骤六：对前缀admin:进行Base64编码处理"></a>步骤六：对前缀admin:进行Base64编码处理</h2><p>在有效载荷处理中，选中前缀<code>admin:</code>，然后选择Base64编码处理，进行编码操作。</p>
-<h2 id="步骤七：取消特殊字符编码"><a href="#步骤七：取消特殊字符编码" class="headerlink" title="步骤七：取消特殊字符编码"></a>步骤七：取消特殊字符编码</h2><p>由于&#x3D;&#x3D;是不被编码的，所以需要取消特殊字符的编码。</p>
-<h2 id="步骤八：进行密码爆破"><a href="#步骤八：进行密码爆破" class="headerlink" title="步骤八：进行密码爆破"></a>步骤八：进行密码爆破</h2><p>最后，进行密码爆破测试，即可获得正确的密码。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在整个过程中，我们使用了Burp Suite进行包拦截和测试，使用了Base64编码和解码函数对字符串进行处理，以及使用了密码爆破测试器对密码进行猜测。这些步骤都是非常重要的，需要仔细地进行操作，以便得到准确的测试结果。</p>
-]]></content>
-      <categories>
-        <category>课程笔记</category>
-      </categories>
-      <tags>
-        <tag>Web课程笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>极客大挑战 2019 Http 1</title>
     <url>/2023/03/06/web2/</url>
     <content><![CDATA[<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
@@ -301,6 +281,26 @@
 </li>
 </ol>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是一种比较常见的Web攻击方式——重放攻击。通过使用Burp等工具，我们可以修改请求信息，以便绕过服务器的安全机制。在实际攻击中，还需要结合具体情况进行调整，才能取得最佳效果。</p>
+]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>Web课程笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP基本认证</title>
+    <url>/2023/03/07/web3/</url>
+    <content><![CDATA[<h2 id="步骤一：抓取靶机的包"><a href="#步骤一：抓取靶机的包" class="headerlink" title="步骤一：抓取靶机的包"></a>步骤一：抓取靶机的包</h2><p>在输入过密码的前提下，使用Burp Suite抓取靶机的包，以便进行后续的密码爆破测试。</p>
+<h2 id="步骤二：找到正确的包后，发送给测试器进行密码爆破"><a href="#步骤二：找到正确的包后，发送给测试器进行密码爆破" class="headerlink" title="步骤二：找到正确的包后，发送给测试器进行密码爆破"></a>步骤二：找到正确的包后，发送给测试器进行密码爆破</h2><p>在找到正确的包后，将其发送给密码爆破测试器，进行后续的测试。</p>
+<h2 id="步骤三：在测试器中添加§前缀"><a href="#步骤三：在测试器中添加§前缀" class="headerlink" title="步骤三：在测试器中添加§前缀"></a>步骤三：在测试器中添加§前缀</h2><p>在测试器中，选取<code>Authorization: Basic YWRtaW46MTIzNA==</code>字段，并选中<code>YWRtaW46MTIzNA==</code>，然后点击右侧的<code>添加§</code>按钮，使其变成<code>Authorization: Basic §YWRtaW46MTIzNA==§</code>的格式。这样做是为了告诉程序需要对这个位置进行密码爆破测试，以便找到正确的密码。</p>
+<h2 id="步骤四：解码验证"><a href="#步骤四：解码验证" class="headerlink" title="步骤四：解码验证"></a>步骤四：解码验证</h2><p>由于<code>YWRtaW46MTIzNA==</code>使用<code>Basic</code>进行解码后得到<code>admin:1234</code>，从而得知密码格式是<code>user:password</code>。</p>
+<h2 id="步骤五：在有效载荷中添加前缀admin"><a href="#步骤五：在有效载荷中添加前缀admin" class="headerlink" title="步骤五：在有效载荷中添加前缀admin:"></a>步骤五：在有效载荷中添加前缀admin:</h2><p>为了进行密码爆破，需要在有效载荷中添加前缀<code>admin:</code>，以便对密码进行猜测。</p>
+<h2 id="步骤六：对前缀admin-进行Base64编码处理"><a href="#步骤六：对前缀admin-进行Base64编码处理" class="headerlink" title="步骤六：对前缀admin:进行Base64编码处理"></a>步骤六：对前缀admin:进行Base64编码处理</h2><p>在有效载荷处理中，选中前缀<code>admin:</code>，然后选择Base64编码处理，进行编码操作。</p>
+<h2 id="步骤七：取消特殊字符编码"><a href="#步骤七：取消特殊字符编码" class="headerlink" title="步骤七：取消特殊字符编码"></a>步骤七：取消特殊字符编码</h2><p>由于&#x3D;&#x3D;是不被编码的，所以需要取消特殊字符的编码。</p>
+<h2 id="步骤八：进行密码爆破"><a href="#步骤八：进行密码爆破" class="headerlink" title="步骤八：进行密码爆破"></a>步骤八：进行密码爆破</h2><p>最后，进行密码爆破测试，即可获得正确的密码。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在整个过程中，我们使用了Burp Suite进行包拦截和测试，使用了Base64编码和解码函数对字符串进行处理，以及使用了密码爆破测试器对密码进行猜测。这些步骤都是非常重要的，需要仔细地进行操作，以便得到准确的测试结果。</p>
 ]]></content>
       <categories>
         <category>课程笔记</category>
