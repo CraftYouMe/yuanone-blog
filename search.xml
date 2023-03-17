@@ -482,31 +482,98 @@
       </categories>
   </entry>
   <entry>
-    <title>网络地址转换（填空答案）</title>
-    <url>/2022/12/05/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<h5 id="配置Basic-NAT"><a href="#配置Basic-NAT" class="headerlink" title="配置Basic NAT"></a>配置Basic NAT</h5><p>本实验中，私网客户端Client_A、 Client_B需要访问公网服务器Server，而RTB上不能保有私网路由，因此将在RTA上配置Basic NAT，动态地为Client_A、Client_B分配公网地址。</p>
-<h6 id="建立物理连接并初始化路由器配置"><a href="#建立物理连接并初始化路由器配置" class="headerlink" title="建立物理连接并初始化路由器配置"></a>建立物理连接并初始化路由器配置</h6><p>按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用户视图下擦除设备中的配置文件，然后重启设备以使系统采用缺省的配置参数进行初始化</p>
-<h6 id="基本IP地址和路由配置"><a href="#基本IP地址和路由配置" class="headerlink" title="基本IP地址和路由配置"></a>基本IP地址和路由配置</h6><p>依据实验组网图，完成RTA和RTB上接口IP地址的配置，<br>需要在RTA上配置缺省路由去往公网路由器RTB，请在下面的空格中补充完整的路由配置：RTB不配路由<br>[RTA]ip route-static <code>0.0.0.0  0 192.76.28.2</code><br>交换机SW1采用出厂缺省配置即可。</p>
-<h6 id="检查连通性"><a href="#检查连通性" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>分别在Client_A和Client_B上ping Server（IP地址为198.76.29.4），其结果为 <code>无法ping通</code><br>产生这种结果的原因是 <code>在公网路由器上不可能有死亡的路由，从Server回应的ping响应报文到RTB的路由表上无法找到10.0.0.0网段的路由</code></p>
-<h6 id="配置Basic-NAT-1"><a href="#配置Basic-NAT-1" class="headerlink" title="配置Basic NAT"></a>配置Basic NAT</h6><p>在RTA上配置Basic NAT：<br>首先通过ACL定义允许源地址属于10.0.0.0&#x2F;24网段的流做NAT转换，请在如下的空格中填写完整的ACL配置命令<br>[RTA]acl number（basic） 2000<br>[RTA-acl-basic-2000]<code>rule 0 permit source 10.0.0.0 0.0.0.255</code><br>其次配置NAT地址池，设置地址池中用于地址转换的地址范围为：198.76.28.11到198.76.28.20，请在下面的空格中填写完成的NAT地址池配置命令：<br>[RTA]nat address-group 1 <code>198.76.28.11 198.76.28.20</code><br>在该命令中，数字1的含义是：<code>地址池的索引号是 1</code><br>最后将地址池与ACL关联，并在正确的接口的正确方向上下发，请在下面的空格中填写完整的命令：<br>[RTA] interface  <code>G0/1</code><br>[RTA-G0&#x2F;1] <code>nat outbound 2000 address-group 1</code> no-pat<br>在该命令中，参数no-pat的含义是：<br><code>表示不适用TCP/UDP端口信息实现多对多地址转换，也即表示使用一对一地址转换，只转换数据包的地址而不转换端口信息</code></p>
-<h6 id="检查连通性-1"><a href="#检查连通性-1" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B分别ping Server，其结果是  <code>可以Ping通</code> 截图如下：</p>
-<h6 id="检查NAT表项"><a href="#检查NAT表项" class="headerlink" title="检查NAT表项"></a>检查NAT表项</h6><p>完成步骤五后立即在RTA上通过 <code>display nat session</code>命令查看NAT会话信息，截图如下：<br>依据该信息输出，可以看到该ICMP报文的源地址10.0.0.1已经转换成公网地址 <code>198.76.28.12</code>，目的端口号和源端口号均为  <code>1024</code>   。源地址10.0.0.2已经转换成公网地址   <code>198.76.28.11</code>   ，目的端口号和源端口号均为   <code>512</code>    。五分钟后再次通过该命令查看表项，发现   <code>NAT表项全部消失</code>   ，产生这种现象的原因是<code>NAT表项具有一定的老化时间，一旦超过老化时间，NAT会删除表项。</code><br>可以通过 <code>display nat aging-time</code>命令查看路由器的NAT默认老化时间<br>注意：<br>步骤六中不同学员实验结果中的NAT会话信息中的显示的转换后的公网地址和端口号可能不同，这是正常现象，以实际显示结果为准。<br>NAPT配置<br>私网客户端Client_A、 Client_B需要访问公网服务器Server，但由于公网地址有限，在RTA上配置的公网地址池范围为198.76.28.11～198.76.28.11，因此配置NAPT，动态地为Client_A、Client_B分配公网地址和协议端口。<br>建立物理连接并初始化路由器配置<br>按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用户视图下擦除设备中的配置文件，然后重启设备以使系统采用缺省的配置参数进行初始化<br>基本IP地址和路由配置<br>与实验任务一同样，配置RTA和RTB相关接口的IP地址以及路由<br>SW1同样采用出厂缺省配置即可</p>
-<h6 id="检查连通性-2"><a href="#检查连通性-2" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B ping Server（IP地址为198.76.29.4），其结果是  不能ping通      （能或不能）ping通</p>
-<h6 id="恢复配置"><a href="#恢复配置" class="headerlink" title="恢复配置"></a>恢复配置</h6><p>[RTA]undo nat address-group 1<br>[RTA- G0&#x2F;1]undo nat outbound 2000</p>
-<h6 id="配置NAPT"><a href="#配置NAPT" class="headerlink" title="配置NAPT"></a>配置NAPT</h6><p>在RTA上配置NAPT：<br>首先通过ACL定义允许源地址属于10.0.0.0&#x2F;24网段的流做NAT转换，请在如下的空格中填写完整的###### ACL配置命令<br>[RTA]acl number（basic） 2000<br>[RTA-acl-basic-2000]<code>rule 0 permit source 10.0.0.0 0.0.0.255</code><br>其次配置NAT地址池1，设置地址池中用于地址转换的地址为：198.76.28.11<br>[RTA-acl-basic-2000]<code>nat address-group 1 198.76.28.11 198.76.28.11</code><br>在接口视图下将NAT地址池与ACL绑定并下发，在配置命令中不需要（需要&#x2F;不需要）携带no-pat参数，意味着NAT要对数据包进行端口的转换,请在下面的空格中填写完整的命令：<br>[RTA] interface   <code>G0/1</code><br>[RTA- G0&#x2F;1]  <code>nat outbound 2000 address-group 1</code></p>
-<h6 id="检查连通性-3"><a href="#检查连通性-3" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B上分别ping Server，其结果是  <code>可以</code> ping通截图如下：</p>
-<h6 id="检查NAT表项-1"><a href="#检查NAT表项-1" class="headerlink" title="检查NAT表项"></a>检查NAT表项</h6><p>完成步骤五后立即在RTA上通过<code>display nat session</code>命令查看NAT会话信息，截图如下：<br>依据该信息输出，可以看到源地址10.0.0.1和10.0.0.2转换成的公网地址分别为 <code>198.76.28.11</code> 和<code>198.76.28.11</code>，10.0.0.1转换后的端口为 <code>12289</code> ，10.0.0.2转换后的端口为   <code>12288</code>   。当RTA出接口收到目的地址为198.76.28.11的回程流量时，正是用当初转换时赋予的不同的端口来分辩该流量是转发给10.0.0.1还是10.0.0.2。NAPT正是靠这种方式，对数据包的IP层和传输层信息同时进行转换，显著地提高公有IP地址的利用效率。<br>注意：<br>步骤六中不同学员实验结果中的NAT会话信息中的显示的转换后的端口号可能不同，这是正常现象，以实际显示结果为准。</p>
-<h6 id="恢复配置-1"><a href="#恢复配置-1" class="headerlink" title="恢复配置"></a>恢复配置</h6><p>[RTA]undo nat address-group 1<br>[RTA- G0&#x2F;1]undo nat outbound 2000</p>
-<h6 id="Easy-IP配置"><a href="#Easy-IP配置" class="headerlink" title="Easy IP配置"></a>Easy IP配置</h6><p>私网客户端Client_A、Client_B需要访问公网服务器Server，使用公网接口IP地址动态为Client_A、Client_B分配公网地址和协议端口。<br>建立物理连接并初始化路由器配置<br>按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用户视图下擦除设备中的配置文件，然后重启设备以使系统采用缺省的配置参数进行初始化<br>基本IP地址和路由配置<br>与实验任务一同样，配置RTA和RTB相关接口的IP地址以及路由<br>SW1同样采用出厂缺省配置即可</p>
-<h6 id="检查连通性-4"><a href="#检查连通性-4" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B ping Server（IP地址为198.76.29.4），其结果是    <code>不可以</code>   可不可以ping通<br>配置Easy IP<br>在RTA上配置Easy IP:<br>首先通过ACL定义允许源地址属于10.0.0.0&#x2F;24网段的流做NAT转换，请在如下的空格中填写完整的ACL配置命令<br>[RTA]acl number(basic)  2000<br>[RTA-acl-basic-2000] <code>rule 0 permit source 10.0.0.0 0.0.0.255</code><br>然后在接口视图下将ACL与接口关联并下发NAT，请在如下的空格中填写完整的配置命令：<br>[RTA] interface   <code>G0/1</code><br>[RTA- G0&#x2F;1] <code>nat outbound 2000</code></p>
-<h6 id="检查连通性-5"><a href="#检查连通性-5" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B分别ping Server，其结果是   <code>可以</code>  可不可以ping通？。截图如下：</p>
-<h6 id="检查NAT表项-2"><a href="#检查NAT表项-2" class="headerlink" title="检查NAT表项"></a>检查NAT表项</h6><p>完成步骤五后立即在RTA上通过 <code>display nat session</code>命令查看NAT会话信息，截图如下：<br>依据该信息输出，可以看到源地址10.0.0.1和10.0.0.2转换成的公网地址分别为 <code>198.76.28.1</code>和 <code>198.76.28.1</code><br>请思考一个问题：在步骤五中，从Client_A能够ping通Server，但是如果从Server端ping Client_A呢？其结果是      <code>无法ping通</code>     可不可以ping通。 导致这种情况的原因是： <code>在RTA上始终没有10.0.0.0/24网段的路由，所以Sever直接ping Client A是不可达的。</code></p>
-<h6 id="NAT-Server配置"><a href="#NAT-Server配置" class="headerlink" title="NAT Server配置"></a>NAT Server配置</h6><p>想让Server端能够ping通Client_A，以便Client_A对外提供ICMP服务，在RTA上为Client_A静态映射公网地址和协议端口，公网地址为198.76.28.11<br>在实验三的基础上继续如下实验</p>
-<h6 id="检查连通性-6"><a href="#检查连通性-6" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Server ping Client_A的私网地址10.0.0.1，其结果是     <code>不可以</code>    可不可以ping通。截图如下：<br>配置NAT Server<br>在RTA上完成NAT Server配置，允许Client_A对外提供ICMP服务。请在如下空格中完成完整的配置命令：<br>[RTA] interface  <code>G0/1</code><br>[RTA-<code>G0/1</code>] <code>nat server protocol icmp global 198.76.28.11 inside 10.0.0.1</code><br>检查连通性并查看NAT表项<br>从Server主动ping Client_A的公网地址198.76.28.11，其结果是   <code>可以</code>  可不可以ping通截图如下：</p>
-<p>在RTA上通过display nat server命令查看NAT Server表项，截图如下：<br>表项信息中显示出地址 <code>198.76.28.11</code> 和地址 <code>10.0.0.1</code>  的一对一的映射关系。</p>
-<p>思考题：按照上面的RTA的NAT server 的配置命令，如果client_A是一台FTP服务器，能否对外提供FTP服务？当然可以，只要修改NAT server的相关配置。NAT server的相关配置如下所示：</p>
-<p>思考题不知道，知道的请在评论区答</p>
+    <title>环境安装</title>
+    <url>/2023/03/17/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h2 id="Windows-11-上安装-Git-的步骤："><a href="#Windows-11-上安装-Git-的步骤：" class="headerlink" title="Windows 11 上安装 Git 的步骤："></a>Windows 11 上安装 Git 的步骤：</h2><ol>
+<li><p>打开浏览器，前往 Git 官方网站：<a href="https://git-scm.com/downloads%E3%80%82">https://git-scm.com/downloads。</a></p>
+</li>
+<li><p>在页面中选择 “Windows” 操作系统，并下载最新的安装程序。你可以根据你的系统架构选择 32 位或 64 位版本。</p>
+</li>
+<li><p>下载完成后，双击运行安装程序。在弹出的安装窗口中点击“下一步”。</p>
+</li>
+<li><p>阅读许可协议并同意，然后再次点击“下一步”。</p>
+</li>
+<li><p>选择安装路径或保留默认设置，然后点击“下一步”。</p>
+</li>
+<li><p>选择组件，建议选择默认选项，然后点击“下一步”。</p>
+</li>
+<li><p>配置安装选项，建议选择默认设置，并确保勾选 “Enable Git Credential Manager” 和 “Use OpenSSL library” 选项，然后点击“下一步”。</p>
+</li>
+<li><p>选择启动菜单文件夹，建议保留默认设置，然后点击“下一步”。</p>
+</li>
+<li><p>选择额外任务，建议保留默认设置，然后点击“下一步”。</p>
+</li>
+<li><p>点击“安装”按钮开始安装 Git。</p>
+</li>
+<li><p>安装完成后，在“完成”窗口中，确保选中 “Launch Git Bash” 选项，然后点击“完成”。</p>
+</li>
+<li><p>打开 Git Bash 终端，输入以下命令验证 Git 是否正确安装：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<ol start="13">
+<li>如果出现类似于以下输出，表示 Git 已经成功安装：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git version 2.33.0.windows.2</span><br></pre></td></tr></table></figure>
+
+<p>至此，你已经在 Windows 11 上成功安装了 Git。</p>
+<h2 id="Windows-11-上安装-Java-64-位："><a href="#Windows-11-上安装-Java-64-位：" class="headerlink" title="Windows 11 上安装 Java 64 位："></a>Windows 11 上安装 Java 64 位：</h2><ol>
+<li><p>打开浏览器，前往 Java 的官方网站 (<a href="https://www.java.com/en/download/manual.jsp)%E3%80%82">https://www.java.com/en/download/manual.jsp)。</a></p>
+</li>
+<li><p>点击“Download”按钮以下载 Java 安装程序。</p>
+</li>
+<li><p>在下载对话框中选择“保存文件”。</p>
+</li>
+<li><p>下载完成后，双击打开安装程序文件。</p>
+</li>
+<li><p>在弹出的安装向导窗口中，选择“安装”选项。</p>
+</li>
+<li><p>稍等片刻，直到安装程序将 Java 安装至您的计算机。</p>
+</li>
+<li><p>在安装完成后，关闭安装程序窗口。</p>
+</li>
+<li><p>检查是否成功安装 Java。打开命令提示符或 PowerShell 终端，输入“java -version”并按回车键。如果成功安装了 Java，则会显示已安装的 Java 版本信息。</p>
+</li>
+</ol>
+<p>恭喜你，已经成功在 Windows 11 计算机上安装了 Java 64 位。</p>
+<h2 id="Windows-11上安装NVIDIA-Broadcast："><a href="#Windows-11上安装NVIDIA-Broadcast：" class="headerlink" title="Windows 11上安装NVIDIA Broadcast："></a>Windows 11上安装NVIDIA Broadcast：</h2><ol>
+<li><p>首先，确保您的计算机安装了最新版的NVIDIA显卡驱动程序。如果您不确定，请前往 NVIDIA官方网站 下载并安装最新版本的显卡驱动。</p>
+</li>
+<li><p>前往NVIDIA Broadcast官网<a href="https://www.nvidia.cn/geforce/broadcasting/broadcast-app/">https://www.nvidia.cn/geforce/broadcasting/broadcast-app/</a> 下载NVIDIA Broadcast应用程序。</p>
+</li>
+<li><p>安装NVIDIA Broadcast应用程序。双击下载好的“NvBroadcastInstaller.exe”文件，按照提示完成安装过程。</p>
+</li>
+<li><p>启动NVIDIA Broadcast应用程序。您可以在Windows 11的开始菜单中找到该应用程序图标，单击以启动它。</p>
+</li>
+<li><p>在NVIDIA Broadcast应用程序中，您将看到可以配置和使用的三个功能：声音，相机和广播。根据您的需求配置每个功能即可，例如选择默认麦克风，摄像头等。</p>
+</li>
+<li><p>当您完成所有设置后，单击“启动广播”按钮即可开始使用NVIDIA Broadcast进行直播或录制视频。</p>
+</li>
+</ol>
+<h2 id="Windows-11上安装最新版本Node-js和pnpm："><a href="#Windows-11上安装最新版本Node-js和pnpm：" class="headerlink" title="Windows 11上安装最新版本Node.js和pnpm："></a>Windows 11上安装最新版本Node.js和pnpm：</h2><ol>
+<li><p>下载Node.js Windows安装程序，访问Node.js官网（<a href="https://nodejs.org/en/download/%EF%BC%89%EF%BC%8C%E9%80%89%E6%8B%A9%E9%80%82%E7%94%A8%E4%BA%8E%E6%82%A8Windows">https://nodejs.org/en/download/），选择适用于您Windows</a> 11的操作系统版本，下载最新版的Node.js安装程序。</p>
+</li>
+<li><p>运行Node.js安装程序，打开已下载的安装程序（.exe文件），按照提示进行安装。选择默认安装选项即可。</p>
+</li>
+<li><p>确认Node.js已正确安装。打开命令提示符或PowerShell，并输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<p>如果Node.js已成功安装，将会显示当前安装的Node.js版本号。</p>
+</li>
+<li><p>安装pnpm。在命令提示符或PowerShell中输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g pnpm</span><br></pre></td></tr></table></figure>
+<p>这将使用npm（Node.js包管理器）来全局安装pnpm。</p>
+</li>
+<li><p>确认pnpm已正确安装。在命令提示符或PowerShell中输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pnpm -v</span><br></pre></td></tr></table></figure>
+<p>如果pnpm已成功安装，将会显示当前安装的pnpm版本号。</p>
+</li>
+</ol>
+<p>现在，您已经成功安装了最新版本的Node.js和pnpm，可以在Windows 11上开始构建应用程序或运行其他Node.js项目。</p>
 ]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
   </entry>
   <entry>
     <title>获取微信推文封面图</title>
