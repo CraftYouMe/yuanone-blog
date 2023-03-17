@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Kali环境中安装Docker的详细步骤：1. 修改源打开终端，输入以下命令： 1sudo nano &#x2F;etc&#x2F;apt&#x2F;sources.list  找到文件中的所有原始并将其替换为中科大的源，请将以下两行添加到文件的末尾： 12deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contribdeb-src http:&#x2F;&#x2F;m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali环境中安装Docker的详细步骤">
+<meta property="og:url" content="https://farone.cn/2023/03/16/Web%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9/index.html">
+<meta property="og:site_name" content="Farone">
+<meta property="og:description" content="Kali环境中安装Docker的详细步骤：1. 修改源打开终端，输入以下命令： 1sudo nano &#x2F;etc&#x2F;apt&#x2F;sources.list  找到文件中的所有原始并将其替换为中科大的源，请将以下两行添加到文件的末尾： 12deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contribdeb-src http:&#x2F;&#x2F;m">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-03-16T11:50:28.000Z">
+<meta property="article:modified_time" content="2023-03-17T07:05:11.066Z">
+<meta property="article:author" content="远一">
+<meta property="article:tag" content="Web课程笔记">
+<meta name="twitter:card" content="summary">
+
+
+<title >Kali环境中安装Docker的详细步骤</title>
+
+<!-- Favicon -->
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"farone.cn","author":"远一","root":"/","typed_text":["但行好事，莫问前程","天暗下来，你就是光"],"theme_version":"2.0.3","theme":{"switch":false,"default":"auto"},"favicon":{"logo":"/img/apple-touch-icon.png","icon16":"/img/apple-touch-icon.png","icon32":"/img/apple-touch-icon.png","appleTouchIcon":"/img/apple-touch-icon.png","webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"notice_outdate":{"enable":true,"style":"flat","limit_day":30,"position":"top"},"search":{"enable":true,"type":"local","href":"https://www.bing.com/search?q=site:","domain":"farone.cn","path":"search.xml"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-03-17 07:05:11"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.3" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/apple-touch-icon.png">
+    
+    
+        <div class="trm-logo-text">
+            Far<span>One</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/board1.jpg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Kali环境中安装Docker的详细步骤
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/head.png">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        远一
+    </h5>
+    
+        <div class="trm-label">
+            
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/CraftYouMe" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=651446044&website=https://farone.cn" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="https://space.bilibili.com/161802916?spm_id_from=333.1007.0.0" title="BiliBili" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-bimobject"></i>
+        </a>
+    
+        <a href="https://sksir.top" title="Nav" rel="nofollow" target="_blank">
+            <i class="iconfont fas fa-home"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                China
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                Forever 18
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                游戏:
+            </div>
+            <div class="trm-label trm-label-light">
+                Genshin Impact
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:651446044@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#Kali环境中安装Docker的详细步骤："  data-scroll-to="#Kali环境中安装Docker的详细步骤："><span class="toc-number">1.</span> <span class="toc-text">Kali环境中安装Docker的详细步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#1-修改源"  data-scroll-to="#1-修改源"><span class="toc-number">1.1.</span> <span class="toc-text">1. 修改源</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#2-安装Docker"  data-scroll-to="#2-安装Docker"><span class="toc-number">1.2.</span> <span class="toc-text">2. 安装Docker</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#3-检查是否安装完成"  data-scroll-to="#3-检查是否安装完成"><span class="toc-number">1.3.</span> <span class="toc-text">3. 检查是否安装完成</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#4-Docker源加速"  data-scroll-to="#4-Docker源加速"><span class="toc-number">1.4.</span> <span class="toc-text">4. Docker源加速</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#5-准备容器镜像"  data-scroll-to="#5-准备容器镜像"><span class="toc-number">1.5.</span> <span class="toc-text">5. 准备容器镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#5-1-漏洞环境"  data-scroll-to="#5-1-漏洞环境"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 漏洞环境</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#5-2-AWVS扫描器"  data-scroll-to="#5-2-AWVS扫描器"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 AWVS扫描器</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#5-3-Nessus扫描器"  data-scroll-to="#5-3-Nessus扫描器"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 Nessus扫描器</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#5-4-启动需要的项目"  data-scroll-to="#5-4-启动需要的项目"><span class="toc-number">1.5.4.</span> <span class="toc-text">5.4 启动需要的项目</span></a></li></ol></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            03/16
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            11:50
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            远一
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="Kali环境中安装Docker的详细步骤："><a href="#Kali环境中安装Docker的详细步骤：" class="headerlink" title="Kali环境中安装Docker的详细步骤："></a>Kali环境中安装Docker的详细步骤：</h1><h2 id="1-修改源"><a href="#1-修改源" class="headerlink" title="1. 修改源"></a>1. 修改源</h2><p>打开终端，输入以下命令：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">nano</span> <span class="string">/etc/apt/sources.list</span></span><br></pre></td></tr></table></figure>
+
+<p>找到文件中的所有原始并将其替换为中科大的源，请将以下两行添加到文件的末尾：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">deb</span> <span class="string">http://mirrors.ustc.edu.cn/kali</span> <span class="string">kali-rolling</span> <span class="string">main</span> <span class="string">non-free</span> <span class="string">contrib</span></span><br><span class="line"><span class="string">deb-src</span> <span class="string">http://mirrors.ustc.edu.cn/kali</span> <span class="string">kali-rolling</span> <span class="string">main</span> <span class="string">non-free</span> <span class="string">contrib</span></span><br></pre></td></tr></table></figure>
+
+<p>按CTRL+X，然后按Y保存更改。</p>
+<h2 id="2-安装Docker"><a href="#2-安装Docker" class="headerlink" title="2. 安装Docker"></a>2. 安装Docker</h2><p>在终端中运行以下命令来安装Docker：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">apt</span> <span class="string">update</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">apt</span> <span class="string">install</span> <span class="string">docker.io</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-检查是否安装完成"><a href="#3-检查是否安装完成" class="headerlink" title="3. 检查是否安装完成"></a>3. 检查是否安装完成</h2><p>运行以下命令检查Docker是否正确安装：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">docker</span> <span class="string">--version</span></span><br></pre></td></tr></table></figure>
+
+<p>如果一切正常，您应该看到Docker的版本信息。</p>
+<h2 id="4-Docker源加速"><a href="#4-Docker源加速" class="headerlink" title="4. Docker源加速"></a>4. Docker源加速</h2><p>为了加快Docker镜像的下载速度，我们可以使用一个国内镜像站点。创建文件&#x2F;etc&#x2F;docker&#x2F;daemon.json：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">nano</span> <span class="string">/etc/docker/daemon.json</span></span><br></pre></td></tr></table></figure>
+
+<p>写入以下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;:</span> [<span class="string">&quot;https://docker.mirrors.ustc.edu.cn/&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按CTRL+ X，然后按Y保存更改。</p>
+<p>重启Docker以使更改生效：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">systemctl</span> <span class="string">restart</span> <span class="string">docker</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-准备容器镜像"><a href="#5-准备容器镜像" class="headerlink" title="5. 准备容器镜像"></a>5. 准备容器镜像</h2><p>在教程过程中会用到多个容器镜像，因此需要提前下载这些镜像。</p>
+<h3 id="5-1-漏洞环境"><a href="#5-1-漏洞环境" class="headerlink" title="5.1 漏洞环境"></a>5.1 漏洞环境</h3><p>运行以下命令来获取漏洞环境的Docker镜像：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">pull</span> <span class="string">area39/pikachu:latest</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-AWVS扫描器"><a href="#5-2-AWVS扫描器" class="headerlink" title="5.2 AWVS扫描器"></a>5.2 AWVS扫描器</h3><p>运行以下命令来获取AWVS扫描器的Docker镜像：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">pull</span> <span class="string">secfa/docker-awvs</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-Nessus扫描器"><a href="#5-3-Nessus扫描器" class="headerlink" title="5.3 Nessus扫描器"></a>5.3 Nessus扫描器</h3><p>运行以下命令来获取Nessus扫描器的Docker镜像：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">pull</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/steinven/nessus:v0.1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-启动需要的项目"><a href="#5-4-启动需要的项目" class="headerlink" title="5.4 启动需要的项目"></a>5.4 启动需要的项目</h3><p>TIP：第三个目前不需要启动，上午的课题只需要启动前两个即可。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动pikachu</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">run</span> <span class="string">-dit</span> <span class="string">-p</span> <span class="number">80</span><span class="string">:80</span> <span class="string">area39/pikachu:latest</span></span><br><span class="line"><span class="comment"># 启动AWVS扫描器</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">run</span> <span class="string">-dit</span> <span class="string">-p</span> <span class="number">3443</span><span class="string">:3443</span> <span class="string">secfa/docker-awvs</span></span><br><span class="line"><span class="comment"># Nessus扫描器</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">docker</span> <span class="string">run</span> <span class="string">-rm</span> <span class="string">-p</span> <span class="number">8834</span><span class="string">:8834</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/steinven/nessus:v0.1</span> <span class="string">&amp;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在您已经成功地在Kali环境中安装了Docker，并准备好使用所需的容器镜像。</p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        远一
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://farone.cn/2023/03/16/Web%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9/" title="Kali环境中安装Docker的详细步骤">https://farone.cn/2023/03/16/Web%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-9/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2023/03/17/hexo%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">hexo基本命令</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/03/17</li>
+                <li>14:42</li>
+                <li>未分类</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2023/03/13/Web%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-5/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">使用dirsearch和bp工具进行渗透测试：目录扫描和弱密码爆破</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/03/13</li>
+                <li>20:36</li>
+                <li>课程笔记</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2021- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">远一</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.3
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("12/28/2021 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.3"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.3"></script>
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.3"></script>
+
+</body>
+
+</html>
