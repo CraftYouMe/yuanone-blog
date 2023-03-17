@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="配置Basic NAT本实验中，私网客户端Client_A、 Client_B需要访问公网服务器Server，而RTB上不能保有私网路由，因此将在RTA上配置Basic NAT，动态地为Client_A、Client_B分配公网地址。 建立物理连接并初始化路由器配置按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络地址转换（填空答案）">
+<meta property="og:url" content="http://example.com/2022/12/05/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="Farone">
+<meta property="og:description" content="配置Basic NAT本实验中，私网客户端Client_A、 Client_B需要访问公网服务器Server，而RTB上不能保有私网路由，因此将在RTA上配置Basic NAT，动态地为Client_A、Client_B分配公网地址。 建立物理连接并初始化路由器配置按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-12-05T10:38:58.000Z">
+<meta property="article:modified_time" content="2022-12-05T10:39:00.000Z">
+<meta property="article:author" content="Yuanone">
+<meta name="twitter:card" content="summary">
+
+
+<title >网络地址转换（填空答案）</title>
+
+<!-- Favicon -->
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Yuanone","root":"/","typed_text":["但行好事，莫问前程","天暗下来，你就是光"],"theme_version":"2.0.3","theme":{"switch":false,"default":"auto"},"favicon":{"logo":"/img/apple-touch-icon.png","icon16":"/img/apple-touch-icon.png","icon32":"/img/apple-touch-icon.png","appleTouchIcon":"/img/apple-touch-icon.png","webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"notice_outdate":{"enable":true,"style":"flat","limit_day":30,"position":"top"},"search":{"enable":true,"type":"local","href":"https://www.bing.com/search?q=site:","domain":"farone.cn","path":"search.xml"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2022-12-05 18:39:00"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.3" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/apple-touch-icon.png">
+    
+    
+        <div class="trm-logo-text">
+            Far<span>One</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/board1.jpg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            网络地址转换（填空答案）
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2022
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        远一
+    </h5>
+    
+        <div class="trm-label">
+            
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=651446044&website=https://farone.cn" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="https://space.bilibili.com/161802916?spm_id_from=333.1007.0.0" title="BiliBili" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-bimobject"></i>
+        </a>
+    
+        <a href="https://sksir.top" title="Nav" rel="nofollow" target="_blank">
+            <i class="iconfont fas fa-home"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                China
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                Forever 18
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                游戏:
+            </div>
+            <div class="trm-label trm-label-light">
+                Genshin Impact
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:651446044@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            12/05
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            18:38
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Yuanone
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h5 id="配置Basic-NAT"><a href="#配置Basic-NAT" class="headerlink" title="配置Basic NAT"></a>配置Basic NAT</h5><p>本实验中，私网客户端Client_A、 Client_B需要访问公网服务器Server，而RTB上不能保有私网路由，因此将在RTA上配置Basic NAT，动态地为Client_A、Client_B分配公网地址。</p>
+<h6 id="建立物理连接并初始化路由器配置"><a href="#建立物理连接并初始化路由器配置" class="headerlink" title="建立物理连接并初始化路由器配置"></a>建立物理连接并初始化路由器配置</h6><p>按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用户视图下擦除设备中的配置文件，然后重启设备以使系统采用缺省的配置参数进行初始化</p>
+<h6 id="基本IP地址和路由配置"><a href="#基本IP地址和路由配置" class="headerlink" title="基本IP地址和路由配置"></a>基本IP地址和路由配置</h6><p>依据实验组网图，完成RTA和RTB上接口IP地址的配置，<br>需要在RTA上配置缺省路由去往公网路由器RTB，请在下面的空格中补充完整的路由配置：RTB不配路由<br>[RTA]ip route-static <code>0.0.0.0  0 192.76.28.2</code><br>交换机SW1采用出厂缺省配置即可。</p>
+<h6 id="检查连通性"><a href="#检查连通性" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>分别在Client_A和Client_B上ping Server（IP地址为198.76.29.4），其结果为 <code>无法ping通</code><br>产生这种结果的原因是 <code>在公网路由器上不可能有死亡的路由，从Server回应的ping响应报文到RTB的路由表上无法找到10.0.0.0网段的路由</code></p>
+<h6 id="配置Basic-NAT-1"><a href="#配置Basic-NAT-1" class="headerlink" title="配置Basic NAT"></a>配置Basic NAT</h6><p>在RTA上配置Basic NAT：<br>首先通过ACL定义允许源地址属于10.0.0.0&#x2F;24网段的流做NAT转换，请在如下的空格中填写完整的ACL配置命令<br>[RTA]acl number（basic） 2000<br>[RTA-acl-basic-2000]<code>rule 0 permit source 10.0.0.0 0.0.0.255</code><br>其次配置NAT地址池，设置地址池中用于地址转换的地址范围为：198.76.28.11到198.76.28.20，请在下面的空格中填写完成的NAT地址池配置命令：<br>[RTA]nat address-group 1 <code>198.76.28.11 198.76.28.20</code><br>在该命令中，数字1的含义是：<code>地址池的索引号是 1</code><br>最后将地址池与ACL关联，并在正确的接口的正确方向上下发，请在下面的空格中填写完整的命令：<br>[RTA] interface  <code>G0/1</code><br>[RTA-G0&#x2F;1] <code>nat outbound 2000 address-group 1</code> no-pat<br>在该命令中，参数no-pat的含义是：<br><code>表示不适用TCP/UDP端口信息实现多对多地址转换，也即表示使用一对一地址转换，只转换数据包的地址而不转换端口信息</code></p>
+<h6 id="检查连通性-1"><a href="#检查连通性-1" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B分别ping Server，其结果是  <code>可以Ping通</code> 截图如下：</p>
+<h6 id="检查NAT表项"><a href="#检查NAT表项" class="headerlink" title="检查NAT表项"></a>检查NAT表项</h6><p>完成步骤五后立即在RTA上通过 <code>display nat session</code>命令查看NAT会话信息，截图如下：<br>依据该信息输出，可以看到该ICMP报文的源地址10.0.0.1已经转换成公网地址 <code>198.76.28.12</code>，目的端口号和源端口号均为  <code>1024</code>   。源地址10.0.0.2已经转换成公网地址   <code>198.76.28.11</code>   ，目的端口号和源端口号均为   <code>512</code>    。五分钟后再次通过该命令查看表项，发现   <code>NAT表项全部消失</code>   ，产生这种现象的原因是<code>NAT表项具有一定的老化时间，一旦超过老化时间，NAT会删除表项。</code><br>可以通过 <code>display nat aging-time</code>命令查看路由器的NAT默认老化时间<br>注意：<br>步骤六中不同学员实验结果中的NAT会话信息中的显示的转换后的公网地址和端口号可能不同，这是正常现象，以实际显示结果为准。<br>NAPT配置<br>私网客户端Client_A、 Client_B需要访问公网服务器Server，但由于公网地址有限，在RTA上配置的公网地址池范围为198.76.28.11～198.76.28.11，因此配置NAPT，动态地为Client_A、Client_B分配公网地址和协议端口。<br>建立物理连接并初始化路由器配置<br>按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用户视图下擦除设备中的配置文件，然后重启设备以使系统采用缺省的配置参数进行初始化<br>基本IP地址和路由配置<br>与实验任务一同样，配置RTA和RTB相关接口的IP地址以及路由<br>SW1同样采用出厂缺省配置即可</p>
+<h6 id="检查连通性-2"><a href="#检查连通性-2" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B ping Server（IP地址为198.76.29.4），其结果是  不能ping通      （能或不能）ping通</p>
+<h6 id="恢复配置"><a href="#恢复配置" class="headerlink" title="恢复配置"></a>恢复配置</h6><p>[RTA]undo nat address-group 1<br>[RTA- G0&#x2F;1]undo nat outbound 2000</p>
+<h6 id="配置NAPT"><a href="#配置NAPT" class="headerlink" title="配置NAPT"></a>配置NAPT</h6><p>在RTA上配置NAPT：<br>首先通过ACL定义允许源地址属于10.0.0.0&#x2F;24网段的流做NAT转换，请在如下的空格中填写完整的###### ACL配置命令<br>[RTA]acl number（basic） 2000<br>[RTA-acl-basic-2000]<code>rule 0 permit source 10.0.0.0 0.0.0.255</code><br>其次配置NAT地址池1，设置地址池中用于地址转换的地址为：198.76.28.11<br>[RTA-acl-basic-2000]<code>nat address-group 1 198.76.28.11 198.76.28.11</code><br>在接口视图下将NAT地址池与ACL绑定并下发，在配置命令中不需要（需要&#x2F;不需要）携带no-pat参数，意味着NAT要对数据包进行端口的转换,请在下面的空格中填写完整的命令：<br>[RTA] interface   <code>G0/1</code><br>[RTA- G0&#x2F;1]  <code>nat outbound 2000 address-group 1</code></p>
+<h6 id="检查连通性-3"><a href="#检查连通性-3" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B上分别ping Server，其结果是  <code>可以</code> ping通截图如下：</p>
+<h6 id="检查NAT表项-1"><a href="#检查NAT表项-1" class="headerlink" title="检查NAT表项"></a>检查NAT表项</h6><p>完成步骤五后立即在RTA上通过<code>display nat session</code>命令查看NAT会话信息，截图如下：<br>依据该信息输出，可以看到源地址10.0.0.1和10.0.0.2转换成的公网地址分别为 <code>198.76.28.11</code> 和<code>198.76.28.11</code>，10.0.0.1转换后的端口为 <code>12289</code> ，10.0.0.2转换后的端口为   <code>12288</code>   。当RTA出接口收到目的地址为198.76.28.11的回程流量时，正是用当初转换时赋予的不同的端口来分辩该流量是转发给10.0.0.1还是10.0.0.2。NAPT正是靠这种方式，对数据包的IP层和传输层信息同时进行转换，显著地提高公有IP地址的利用效率。<br>注意：<br>步骤六中不同学员实验结果中的NAT会话信息中的显示的转换后的端口号可能不同，这是正常现象，以实际显示结果为准。</p>
+<h6 id="恢复配置-1"><a href="#恢复配置-1" class="headerlink" title="恢复配置"></a>恢复配置</h6><p>[RTA]undo nat address-group 1<br>[RTA- G0&#x2F;1]undo nat outbound 2000</p>
+<h6 id="Easy-IP配置"><a href="#Easy-IP配置" class="headerlink" title="Easy IP配置"></a>Easy IP配置</h6><p>私网客户端Client_A、Client_B需要访问公网服务器Server，使用公网接口IP地址动态为Client_A、Client_B分配公网地址和协议端口。<br>建立物理连接并初始化路由器配置<br>按实验组网图进行物理连接并检查设备的软件版本及配置信息，确保各设备软件版本符合要求，所有配置为初始状态。如果配置不符合要求，请学员在用户视图下擦除设备中的配置文件，然后重启设备以使系统采用缺省的配置参数进行初始化<br>基本IP地址和路由配置<br>与实验任务一同样，配置RTA和RTB相关接口的IP地址以及路由<br>SW1同样采用出厂缺省配置即可</p>
+<h6 id="检查连通性-4"><a href="#检查连通性-4" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B ping Server（IP地址为198.76.29.4），其结果是    <code>不可以</code>   可不可以ping通<br>配置Easy IP<br>在RTA上配置Easy IP:<br>首先通过ACL定义允许源地址属于10.0.0.0&#x2F;24网段的流做NAT转换，请在如下的空格中填写完整的ACL配置命令<br>[RTA]acl number(basic)  2000<br>[RTA-acl-basic-2000] <code>rule 0 permit source 10.0.0.0 0.0.0.255</code><br>然后在接口视图下将ACL与接口关联并下发NAT，请在如下的空格中填写完整的配置命令：<br>[RTA] interface   <code>G0/1</code><br>[RTA- G0&#x2F;1] <code>nat outbound 2000</code></p>
+<h6 id="检查连通性-5"><a href="#检查连通性-5" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Client_A、Client_B分别ping Server，其结果是   <code>可以</code>  可不可以ping通？。截图如下：</p>
+<h6 id="检查NAT表项-2"><a href="#检查NAT表项-2" class="headerlink" title="检查NAT表项"></a>检查NAT表项</h6><p>完成步骤五后立即在RTA上通过 <code>display nat session</code>命令查看NAT会话信息，截图如下：<br>依据该信息输出，可以看到源地址10.0.0.1和10.0.0.2转换成的公网地址分别为 <code>198.76.28.1</code>和 <code>198.76.28.1</code><br>请思考一个问题：在步骤五中，从Client_A能够ping通Server，但是如果从Server端ping Client_A呢？其结果是      <code>无法ping通</code>     可不可以ping通。 导致这种情况的原因是： <code>在RTA上始终没有10.0.0.0/24网段的路由，所以Sever直接ping Client A是不可达的。</code></p>
+<h6 id="NAT-Server配置"><a href="#NAT-Server配置" class="headerlink" title="NAT Server配置"></a>NAT Server配置</h6><p>想让Server端能够ping通Client_A，以便Client_A对外提供ICMP服务，在RTA上为Client_A静态映射公网地址和协议端口，公网地址为198.76.28.11<br>在实验三的基础上继续如下实验</p>
+<h6 id="检查连通性-6"><a href="#检查连通性-6" class="headerlink" title="检查连通性"></a>检查连通性</h6><p>从Server ping Client_A的私网地址10.0.0.1，其结果是     <code>不可以</code>    可不可以ping通。截图如下：<br>配置NAT Server<br>在RTA上完成NAT Server配置，允许Client_A对外提供ICMP服务。请在如下空格中完成完整的配置命令：<br>[RTA] interface  <code>G0/1</code><br>[RTA-<code>G0/1</code>] <code>nat server protocol icmp global 198.76.28.11 inside 10.0.0.1</code><br>检查连通性并查看NAT表项<br>从Server主动ping Client_A的公网地址198.76.28.11，其结果是   <code>可以</code>  可不可以ping通截图如下：</p>
+<p>在RTA上通过display nat server命令查看NAT Server表项，截图如下：<br>表项信息中显示出地址 <code>198.76.28.11</code> 和地址 <code>10.0.0.1</code>  的一对一的映射关系。</p>
+<p>思考题：按照上面的RTA的NAT server 的配置命令，如果client_A是一台FTP服务器，能否对外提供FTP服务？当然可以，只要修改NAT server的相关配置。NAT server的相关配置如下所示：</p>
+<p>思考题不知道，知道的请在评论区答</p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Yuanone
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://example.com/2022/12/05/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2/" title="网络地址转换（填空答案）">http://example.com/2022/12/05/%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2023/03/06/web/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">如何在同一台电脑上使用Python 2.7和Python 3.7</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/03/06</li>
+                <li>15:25</li>
+                <li>课程笔记</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2022/11/25/fx3/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">如何获取微信推文封面图？</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>22/11/25</li>
+                <li>23:27</li>
+                <li>好用分享</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2021- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">远一</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.3
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("12/28/2021 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.3"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.3"></script>
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.3"></script>
+
+</body>
+
+</html>

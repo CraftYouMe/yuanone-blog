@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="项目设计要求数据可朔源 服务器配置卷影副本和Server backup，计划每日00：00自动备份，可以达到随时恢复相应版本的文件夹以及单个文件的数据。  数据可漫游 使用者切换电脑后，账户内设置和文件数据不会改变，将会存储到服务器内。更换新电脑加入域后，可以直接恢复到新电脑内，不需要进行人工拷贝或者重新设置。  数据可修复 服务器存储做在了Raid-5的磁盘卷上，如果硬盘有损坏，数据不会丢失，可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建公司文件共享体系方案">
+<meta property="og:url" content="http://example.com/2022/10/28/fx1/index.html">
+<meta property="og:site_name" content="Farone">
+<meta property="og:description" content="项目设计要求数据可朔源 服务器配置卷影副本和Server backup，计划每日00：00自动备份，可以达到随时恢复相应版本的文件夹以及单个文件的数据。  数据可漫游 使用者切换电脑后，账户内设置和文件数据不会改变，将会存储到服务器内。更换新电脑加入域后，可以直接恢复到新电脑内，不需要进行人工拷贝或者重新设置。  数据可修复 服务器存储做在了Raid-5的磁盘卷上，如果硬盘有损坏，数据不会丢失，可">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="article:published_time" content="2022-10-27T17:45:00.000Z">
+<meta property="article:modified_time" content="2022-10-27T17:45:00.000Z">
+<meta property="article:author" content="Yuanone">
+<meta property="article:tag" content="资源分享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/404.jpg">
+
+
+<title >创建公司文件共享体系方案</title>
+
+<!-- Favicon -->
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/img/apple-touch-icon.png?v=2.0.3' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Yuanone","root":"/","typed_text":["但行好事，莫问前程","天暗下来，你就是光"],"theme_version":"2.0.3","theme":{"switch":false,"default":"auto"},"favicon":{"logo":"/img/apple-touch-icon.png","icon16":"/img/apple-touch-icon.png","icon32":"/img/apple-touch-icon.png","appleTouchIcon":"/img/apple-touch-icon.png","webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"notice_outdate":{"enable":true,"style":"flat","limit_day":30,"position":"top"},"search":{"enable":true,"type":"local","href":"https://www.bing.com/search?q=site:","domain":"farone.cn","path":"search.xml"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2022-10-28 01:45:00"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.3" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/apple-touch-icon.png">
+    
+    
+        <div class="trm-logo-text">
+            Far<span>One</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <i class="iconfont fas fa-search"></i>
+    </div>
+     
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/board1.jpg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            创建公司文件共享体系方案
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2022
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        远一
+    </h5>
+    
+        <div class="trm-label">
+            
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=651446044&website=https://farone.cn" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="https://space.bilibili.com/161802916?spm_id_from=333.1007.0.0" title="BiliBili" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-bimobject"></i>
+        </a>
+    
+        <a href="https://sksir.top" title="Nav" rel="nofollow" target="_blank">
+            <i class="iconfont fas fa-home"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                China
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                Forever 18
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                游戏:
+            </div>
+            <div class="trm-label trm-label-light">
+                Genshin Impact
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:651446044@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#项目设计要求"  data-scroll-to="#项目设计要求"><span class="toc-number">1.</span> <span class="toc-text">项目设计要求</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#方案优劣势及解决方案"  data-scroll-to="#方案优劣势及解决方案"><span class="toc-number">2.</span> <span class="toc-text">方案优劣势及解决方案</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#项目实施步骤"  data-scroll-to="#项目实施步骤"><span class="toc-number">3.</span> <span class="toc-text">项目实施步骤</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#测试环节"  data-scroll-to="#测试环节"><span class="toc-number">4.</span> <span class="toc-text">测试环节</span></a></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            10/28
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            01:45
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Yuanone
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h3 id="项目设计要求"><a href="#项目设计要求" class="headerlink" title="项目设计要求"></a>项目设计要求</h3><h4 id="数据可朔源"><a href="#数据可朔源" class="headerlink" title="数据可朔源"></a>数据可朔源</h4><ul>
+<li>服务器配置卷影副本和Server backup，计划每日00：00自动备份，可以达到随时恢复相应版本的文件夹以及单个文件的数据。</li>
+</ul>
+<h4 id="数据可漫游"><a href="#数据可漫游" class="headerlink" title="数据可漫游"></a>数据可漫游</h4><ul>
+<li>使用者切换电脑后，账户内设置和文件数据不会改变，将会存储到服务器内。更换新电脑加入域后，可以直接恢复到新电脑内，不需要进行人工拷贝或者重新设置。</li>
+</ul>
+<h4 id="数据可修复"><a href="#数据可修复" class="headerlink" title="数据可修复"></a>数据可修复</h4><ul>
+<li>服务器存储做在了Raid-5的磁盘卷上，如果硬盘有损坏，数据不会丢失，可重新插入新的硬盘，进行修复即可。保障了服务器数据的安全性。</li>
+</ul>
+<h4 id="账户管理方便"><a href="#账户管理方便" class="headerlink" title="账户管理方便"></a>账户管理方便</h4><ul>
+<li>各用户账户的浏览权限不混乱，可随时更改各账户的浏览权限。</li>
+</ul>
+<h3 id="方案优劣势及解决方案"><a href="#方案优劣势及解决方案" class="headerlink" title="方案优劣势及解决方案"></a>方案优劣势及解决方案</h3><h4 id="优势概述"><a href="#优势概述" class="headerlink" title="优势概述"></a>优势概述</h4><ol>
+<li>方便管理，权限管理集中，管理员可更好进行计算机资源的管理</li>
+<li>安全性高，利于企业的保密资料管理，可让指定的人看，但不可删改移</li>
+<li>方便对用户操作进行权限设置，可以分发，指派软件，实现计算机统一安装</li>
+<li>使用漫游账户和文件夹重定向技术，个人账户的工作文件及数据可以存放在服务器内，统一进行备份、管理、恢复</li>
+</ol>
+<h4 id="劣势概述"><a href="#劣势概述" class="headerlink" title="劣势概述"></a>劣势概述</h4><ol>
+<li>未进行端口屏蔽</li>
+<li>无法批量创建账户或者批量设置权限</li>
+</ol>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li>对需要的端口进行开放，禁用其余不必要端口</li>
+<li>使用ADManager Plus，它可以通过.cvs文件对相应数据进行上传，还可以通过自定义模板对账户进行批量上传，极大的解决了AD域用户批量管理的问题。</li>
+</ol>
+<h3 id="项目实施步骤"><a href="#项目实施步骤" class="headerlink" title="项目实施步骤"></a>项目实施步骤</h3><h4 id="新建域“jinxiangyuan-com”"><a href="#新建域“jinxiangyuan-com”" class="headerlink" title="新建域“jinxiangyuan.com”"></a>新建域“jinxiangyuan.com”</h4><p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/3047133561.png" alt="1.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br>####	在域内新建单位组织<br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/2621091782.png" alt="2.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br>####	在虚拟机上新建4块2G硬盘，作为服务器存储<br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/2618820423.png" alt="3.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/1363494238.png" alt="4.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/4216021674.png" alt="5.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h4 id="在服务器存储中创建文件夹"><a href="#在服务器存储中创建文件夹" class="headerlink" title="在服务器存储中创建文件夹"></a>在服务器存储中创建文件夹</h4><p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/3373330913.png" alt="6.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br>####	给各个用户分配权限<br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/807924369.png" alt="7.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/1893755760.png" alt="8.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h4 id="配置漫游用户文件"><a href="#配置漫游用户文件" class="headerlink" title="配置漫游用户文件"></a>配置漫游用户文件</h4><p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/904888668.png" alt="1111.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br>####	添加服务器备份功能，按照计划进行备份<br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/3207672060.png" alt="9.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br>####	添加卷影副本<br><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/2137157129.png" alt="10.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="测试环节"><a href="#测试环节" class="headerlink" title="测试环节"></a>测试环节</h3><h4 id="数据都要有相应的版本可以随时朔源"><a href="#数据都要有相应的版本可以随时朔源" class="headerlink" title="数据都要有相应的版本可以随时朔源"></a>数据都要有相应的版本可以随时朔源</h4><ul>
+<li>对文件进行更改</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/458965202.png" alt="11.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>选择文件进行回退</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/775932064.png" alt="12.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>成功恢复到之前备份的</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/671438867.png" alt="13.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>检查内容是否更改</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/2638011957.png" alt="14.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h4 id="服务器数据得到稳妥的安全保障"><a href="#服务器数据得到稳妥的安全保障" class="headerlink" title="服务器数据得到稳妥的安全保障"></a>服务器数据得到稳妥的安全保障</h4><ul>
+<li>随意新建文件</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/1154836450.png" alt="15.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>随机删除一块硬盘</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/529261097.png" alt="16.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>文件内容没有丢失</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/340342206.png" alt="17.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>重新插入一个硬盘，修复服务器</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/1684269482.png" alt="18.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h4 id="用户更换电脑无需拷贝数据"><a href="#用户更换电脑无需拷贝数据" class="headerlink" title="用户更换电脑无需拷贝数据"></a>用户更换电脑无需拷贝数据</h4><ul>
+<li>在Win2008-3主机上登录创建文件改变配色</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/2831445869.png" alt="copy.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>在Win2008-2主机上登录，刚刚创建的文件和配色都漫游了</li>
+</ul>
+<p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/3534902107.png" alt="copy2.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        Yuanone
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="http://example.com/2022/10/28/fx1/" title="创建公司文件共享体系方案">http://example.com/2022/10/28/fx1/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2022/11/25/fx2/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">在浙学无人值守刷课</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>22/11/25</li>
+                <li>18:50</li>
+                <li>大学生刷课</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2021- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">远一</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.3
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("12/28/2021 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="iconfont fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.0.3"></script>
+    
+
+    
+        
+<script src="https://unpkg.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.3"></script>
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.3"></script>
+
+</body>
+
+</html>
