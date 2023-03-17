@@ -320,6 +320,9 @@
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">clean</span> <span class="string">;</span> <span class="string">hexo</span> <span class="string">g</span> <span class="string">;</span> <span class="string">hexo</span> <span class="string">s</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
+      <categories>
+        <category>基础命令操作</category>
+      </categories>
       <tags>
         <tag>基础</tag>
       </tags>
