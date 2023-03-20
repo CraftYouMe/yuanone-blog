@@ -349,7 +349,7 @@
 <p>现在您已经成功地在Kali环境中安装了Docker，并准备好使用所需的容器镜像。</p>
 ]]></content>
       <categories>
-        <category>课程笔记</category>
+        <category>一步到位</category>
       </categories>
       <tags>
         <tag>Web课程笔记</tag>
@@ -438,10 +438,10 @@
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>如有不懂，请在留言区留言</p>
 ]]></content>
       <categories>
-        <category>大学生刷课</category>
+        <category>一步到位</category>
       </categories>
       <tags>
-        <tag>资源分享</tag>
+        <tag>大学生刷课</tag>
       </tags>
   </entry>
   <entry>
@@ -518,11 +518,8 @@
 <p><img src="https://yuan.thankyy.cn/usr/uploads/2022/10/3534902107.png" alt="copy2.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
 ]]></content>
       <categories>
-        <category>在校作业</category>
+        <category>课程笔记</category>
       </categories>
-      <tags>
-        <tag>资源分享</tag>
-      </tags>
   </entry>
   <entry>
     <title>图片转Excel表格在线工具</title>
@@ -543,7 +540,7 @@
       </tags>
   </entry>
   <entry>
-    <title>标题函数</title>
+    <title>Async 标题函数</title>
     <url>/2023/03/17/%E6%A0%87%E9%A2%98%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<ul>
 <li><code>keywords：</code>关键字，用于 meta 标签</li>
@@ -558,14 +555,14 @@
 </ul>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">从零开始搭建一个后台模板</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">admin-template,vue,element,后台模板</span></span><br><span class="line"><span class="attr">cover:</span> [<span class="string">https://www.logosc.cn/uploads/resources/2018/11/29/1543459457_thumb.jpg</span>]</span><br><span class="line"><span class="attr">sticky:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">banner:</span> </span><br><span class="line">  <span class="attr">type:</span> <span class="string">img</span></span><br><span class="line">  <span class="attr">bgurl:</span> <span class="string">https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg</span></span><br><span class="line">  <span class="attr">bannerText:</span> <span class="string">Hi</span> <span class="string">my</span> <span class="string">new</span> <span class="string">friend!</span></span><br><span class="line"><span class="attr">toc:</span> <span class="literal">false</span> <span class="comment"># 无需显示目录</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>基础命令操作</category>
+        <category>基础命令</category>
       </categories>
   </entry>
   <entry>
     <title>环境安装</title>
     <url>/2023/03/17/%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h2 id="Windows-11-上安装-Git-的步骤："><a href="#Windows-11-上安装-Git-的步骤：" class="headerlink" title="Windows 11 上安装 Git 的步骤："></a>Windows 11 上安装 Git 的步骤：</h2><ol>
-<li><p>打开浏览器，前往 Git 官方网站：<a href="https://git-scm.com/downloads%E3%80%82">https://git-scm.com/downloads。</a></p>
+<li><p>打开浏览器，前往 Git 官方网站：<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
 </li>
 <li><p>在页面中选择 “Windows” 操作系统，并下载最新的安装程序。你可以根据你的系统架构选择 32 位或 64 位版本。</p>
 </li>
@@ -599,7 +596,7 @@
 
 <p>至此，你已经在 Windows 11 上成功安装了 Git。</p>
 <h2 id="Windows-11-上安装-Java-64-位："><a href="#Windows-11-上安装-Java-64-位：" class="headerlink" title="Windows 11 上安装 Java 64 位："></a>Windows 11 上安装 Java 64 位：</h2><ol>
-<li><p>打开浏览器，前往 Java 的官方网站 (<a href="https://www.java.com/en/download/manual.jsp)%E3%80%82">https://www.java.com/en/download/manual.jsp)。</a></p>
+<li><p>打开浏览器，前往 Java 的官方网站 (<a href="https://www.java.com/en/download/manual.jsp">https://www.java.com/en/download/manual.jsp</a>)</p>
 </li>
 <li><p>点击“Download”按钮以下载 Java 安装程序。</p>
 </li>
@@ -664,10 +661,7 @@
 <p>然后下面会看到有个 “var cdn_url_1_1” 也有个链接，这也是封面图，这个是按照 1:1 显示的图片。</p>
 ]]></content>
       <categories>
-        <category>好用分享</category>
+        <category>一步到位</category>
       </categories>
-      <tags>
-        <tag>资源分享</tag>
-      </tags>
   </entry>
 </search>
