@@ -3,8 +3,8 @@
   <entry>
     <title>Hexo博客创建</title>
     <url>/2023/03/19/Hexo%E5%88%9B%E5%BB%BA/</url>
-    <content><![CDATA[<h2 id="基础环境安装"><a href="#基础环境安装" class="headerlink" title="基础环境安装"></a>基础环境安装</h2><h3 id="安装-Node-js。"><a href="#安装-Node-js。" class="headerlink" title="安装 Node.js。"></a>安装 Node.js。</h3><p>   在 <a href="https://nodejs.org/">Node.js 官网</a> 下载并安装最新版本的 Node.js。</p>
-<h3 id="安装-Git。"><a href="#安装-Git。" class="headerlink" title="安装 Git。"></a>安装 Git。</h3><p>   在 <a href="https://git-scm.com/downloads">Git 官网</a> 下载并安装最新版本的 Git。</p>
+    <content><![CDATA[<h2 id="基础环境安装"><a href="#基础环境安装" class="headerlink" title="基础环境安装"></a>基础环境安装</h2><h3 id="安装-Node-js。"><a href="#安装-Node-js。" class="headerlink" title="安装 Node.js。"></a>安装 Node.js。</h3><p>在 <a href="https://nodejs.org/">Node.js 官网</a> 下载并安装最新版本的 Node.js。</p>
+<h3 id="安装-Git。"><a href="#安装-Git。" class="headerlink" title="安装 Git。"></a>安装 Git。</h3><p>在 <a href="https://git-scm.com/downloads">Git 官网</a> 下载并安装最新版本的 Git。</p>
 <h3 id="安装-Hexo。"><a href="#安装-Hexo。" class="headerlink" title="安装 Hexo。"></a>安装 Hexo。</h3><p>   打开命令行终端（Windows 可以使用 PowerShell 或者 CMD，MacOS 可以使用 Terminal），输入以下命令来安装 Hexo：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 <h2 id="博客基础部署设置"><a href="#博客基础部署设置" class="headerlink" title="博客基础部署设置"></a>博客基础部署设置</h2><h3 id="创建博客。"><a href="#创建博客。" class="headerlink" title="创建博客。"></a>创建博客。</h3><p>   在命令行终端中进入想要存放博客的文件夹，例如 <code>cd Documents/Blog</code>。<br>   输入以下命令来创建一个新的 Hexo 博客：</p>
