@@ -14,8 +14,8 @@
   --primary-30: rgba(135, 206, 250, 0.3);
   --primary-weak: #ADD8E6;
   --primary-weak-50: rgba(173, 216, 230, 0.5);
-  --body-color: #7B7B7D;
-  --body-color-5: rgba(123, 123, 125, 0.05);
+  --body-color: #1C1C1C;
+  --body-color-5: rgba(28, 28, 28, 0.05);
   --body-bg-color: #00151f;
   --theme-color: #00283a;
   --theme-bg-color: #fcfcfe;
@@ -36,11 +36,11 @@
   --tabele-thead-border-color: #eee;
   --tab-border-color: #f1f1f1;
   --tab-botton-bg-color: #f1f1f1;
-  --tab-botton-color: #7B7B7D;
+  --tab-botton-color: #1C1C1C;
   --tab-button-hover-bg-color: #eeeeee;
   --tab-button-active-bg-color: #ffffff;
   --fixed-button-bg-color: #ffffff;
-  --fixed-button-color: #7B7B7D;
+  --fixed-button-color: #1C1C1C;
   --code-bg-color: #f1f1f1;
   --code-color: #476582;
   --notice-outdate-bg: #ffe6e6;

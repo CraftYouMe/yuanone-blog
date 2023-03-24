@@ -11,36 +11,45 @@
 </li>
 <li><p>安装 Git。<br>在 <a href="https://git-scm.com/downloads">Git 官网</a> 下载并安装最新版本的 Git。</p>
 </li>
-<li><p>安装 Hexo。<br>打开命令行终端（Windows 可以使用 PowerShell 或者 CMD，MacOS 可以使用 Terminal），输入以下命令来安装 Hexo：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+<li><p>安装 Hexo。<br>打开命令行终端，输入以下命令来安装 Hexo：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="博客基础部署设置"><a href="#博客基础部署设置" class="headerlink" title="博客基础部署设置"></a>博客基础部署设置</h2><ol>
 <li><p>创建博客。<br>在命令行终端中进入想要存放博客的文件夹，例如 <code>cd Documents/Blog</code>。<br>输入以下命令来创建一个新的 Hexo 博客：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hexo init myblog</span><br><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init myblog</span><br><span class="line">cd myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>本地启动博客<br>打开命令行工具，并进入您的Hexo博客所在的文件夹。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">clean</span> <span class="string">;</span> <span class="string">hexo</span> <span class="string">g</span> <span class="string">;</span> <span class="string">hexo</span> <span class="string">s</span></span><br></pre></td></tr></table></figure>
-<p>在浏览器中打开 “<a href="http://localhost:4000/">http://localhost:4000/</a>“, 即可查看您的Hexo博客。</p>
+<li><p>本地启动博客<br>打开命令行工具，并进入您的Hexo博客所在的文件夹。输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean ; hexo g ; hexo s</span><br></pre></td></tr></table></figure>
+<p>在浏览器中打开 “<a href="http://localhost:4000/%22%EF%BC%8C%E5%8D%B3%E5%8F%AF%E6%9F%A5%E7%9C%8B%E6%82%A8%E7%9A%84Hexo%E5%8D%9A%E5%AE%A2%E3%80%82">http://localhost:4000/&quot;，即可查看您的Hexo博客。</a></p>
 </li>
 </ol>
 <h2 id="Hexo部署到Github仓库。"><a href="#Hexo部署到Github仓库。" class="headerlink" title="Hexo部署到Github仓库。"></a>Hexo部署到Github仓库。</h2><ol>
-<li><p>修改Hexo中_Config部署配置<br>打开 <code>myblog</code> 文件夹下的 <code>_config.yml</code> 文件，在其中修改以下配置：</p>
+<li><p>修改Hexo中 <code>_config.yml</code> 部署配置。<br>打开 <code>myblog</code> 文件夹下的 <code>_config.yml</code> 文件，在其中修改以下配置：</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">   <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">   <span class="attr">repository:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">   <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
 <p>将其中的 <code>&lt;username&gt;</code> 替换成你的 GitHub 用户名，并保存文件。</p>
 </li>
 <li><p>部署博客。<br>在命令行终端中输入以下命令，将博客部署到 GitHub Pages 上：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看博客。<br>在浏览器中访问 <code>https://&lt;username&gt;.github.io</code>，即可查看你的博客。</p>
 </li>
 </ol>
 <h2 id="设置本地电脑和-Git-仓库-SSH-认证。"><a href="#设置本地电脑和-Git-仓库-SSH-认证。" class="headerlink" title="设置本地电脑和 Git 仓库 SSH 认证。"></a>设置本地电脑和 Git 仓库 SSH 认证。</h2><ol>
-<li>打开命令行终端，输入以下命令生成 SSH 密钥：  <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure></li>
-<li>使用下面的命令快捷复制密钥<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">clip &lt; <span class="variable">%userprofile%</span>\.ssh\id_ed25519.pub</span><br></pre></td></tr></table></figure>
-将生成的公钥（默认在用户目录下 <code>.ssh/id_ed25519.pub</code>）添加到你的 GitHub 账户中。</li>
-<li>修改 Git 配置，使其使用 SSH 认证。在命令行终端中输入以下命令：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;your_email@example.com&quot;</span><br><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global core.sshCommand &quot;ssh -i ~/.ssh/id_ed25519&quot;</span><br></pre></td></tr></table></figure></li>
-<li>现在可以使用 SSH 连接到 Git 仓库了。在 <code>_config.yml</code> 文件中将 <code>repository</code> 改为使用 SSH 协议的地址，例如：<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">   <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">   <span class="attr">repository:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">   <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure></li>
+<li><p>打开命令行终端，输入以下命令生成 SSH 密钥：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用下面的命令快捷复制密钥：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clip &lt; %userprofile%\.ssh\id_ed25519.pub</span><br></pre></td></tr></table></figure>
+
+<p>将生成的公钥（默认在用户目录下 <code>.ssh/id_ed25519.pub</code>）添加到你的 GitHub 账户中。</p>
+</li>
+<li><p>修改 Git 配置，使其使用 SSH 认证。在命令行终端中输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.email &quot;your_email@example.com&quot;</span><br><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global core.sshCommand &quot;ssh -i ~/.ssh/id_ed25519&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在可以使用 SSH 连接到 Git 仓库了。在 <code>_config.yml</code> 文件中将 <code>repository</code> 改为使用 SSH 协议的地址，例如：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">   <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">   <span class="attr">repository:</span> <span class="string">git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</span></span><br><span class="line">   <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure></li>
 </ol>
+<p><strong>注意：</strong> 以上命令均为在命令行终端中执行。</p>
 ]]></content>
       <categories>
         <category>一步到位</category>
