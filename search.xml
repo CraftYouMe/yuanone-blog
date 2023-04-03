@@ -9,10 +9,10 @@
 </ol>
 <p>首先，点击进入 <a href="https://icomoon.io/app/#/select">https://icomoon.io/app/#/select</a> ，然后点击页面左上角的 “import icons” 按钮，分别导入我们本地的两个字体。注意，此时只需要导入各个图标库的.svg文件。</p>
 <p>导入图标库的界面如下所示：</p>
-<p><img src="https://img-blog.csdn.net/20161101113642322" alt="导入图标库" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/fonts-1.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
 <p>现在我们已经成功地把本地原来的图标库和新图标库都导入进来了，如下图所示：</p>
 <p><img src="https://img-blog.csdn.net/20161101113707478" alt="导入成功" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
-<ol start="2">
+<ol>
 <li>合并图标库</li>
 </ol>
 <p>接着就是选择我们需要合并的图标。一般情况下，只需全选这两个图标库的所有图标就可以了。</p>
