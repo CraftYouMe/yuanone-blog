@@ -10,9 +10,7 @@
 <p>首先，点击进入 <a href="https://icomoon.io/app/#/select">https://icomoon.io/app/#/select</a> ，然后点击页面左上角的 “import icons” 按钮，分别导入我们本地的两个字体。注意，此时只需要导入各个图标库的.svg文件。</p>
 <p>导入图标库的界面如下所示：</p>
 <p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/fonts-1.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
-<p>现在我们已经成功地把本地原来的图标库和新图标库都导入进来了，如下图所示：</p>
-<p><img src="https://img-blog.csdn.net/20161101113707478" alt="导入成功" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
-<ol>
+<ol start="2">
 <li>合并图标库</li>
 </ol>
 <p>接着就是选择我们需要合并的图标。一般情况下，只需全选这两个图标库的所有图标就可以了。</p>
@@ -22,13 +20,13 @@
 </ul>
 <p>对于第二个图标库也进行同样的操作。</p>
 <p>然后我们就可以看到页面中所有图标都被我们选中了。最下方的 “selection” 显示了我们一共选择了262个图标。接下来，点击右下角的 “Generate Font” 去生成字体。</p>
-<p><img src="https://img-blog.csdn.net/20161101113852247" alt="全选图标" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/fonts-2.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
 <ol start="3">
 <li>生成新图标库</li>
 </ol>
 <p>进入生成图标页面，点击上方的 “Preferences” ，设置合并之后图标库的名称。这里我们将其命名为 “glyphicons-halflings-regular”。最好与原来项目使用的字体文件名称一致，这样只需替换文件而无需在CSS中更改文件名。</p>
-<p><img src="https://img-blog.csdn.net/20161101114029032" alt="生成新图标库" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
 <p>设置完成后，点击页面右下角的 “Download” 就可以下载了。</p>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/fonts-3.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
 <p>通过以上步骤，就能成功将多个icon库合并在一起，并使用它们在项目中。</p>
 ]]></content>
       <categories>
