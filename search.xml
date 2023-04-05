@@ -37,6 +37,44 @@
       </tags>
   </entry>
   <entry>
+    <title>DNS不可用解决方案</title>
+    <url>/2023/04/05/DNS%E4%B8%8D%E5%8F%AF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="遇到DNS不可用或者DNS解析错误的原因有以下几种："><a href="#遇到DNS不可用或者DNS解析错误的原因有以下几种：" class="headerlink" title="遇到DNS不可用或者DNS解析错误的原因有以下几种："></a>遇到DNS不可用或者DNS解析错误的原因有以下几种：</h2><ul>
+<li>使用代理软件后，不正常关闭。(如Clash)</li>
+<li>被恶意软件修改</li>
+<li>其他神奇的原因</li>
+</ul>
+<h2 id="常用修复方法"><a href="#常用修复方法" class="headerlink" title="常用修复方法"></a>常用修复方法</h2><ol>
+<li>使用火绒或者电脑管家、360等自带的网络修复工具进行一键修复</li>
+</ol>
+<h2 id="终极修复方法"><a href="#终极修复方法" class="headerlink" title="终极修复方法"></a>终极修复方法</h2><ol>
+<li>更改网络ipv4中的DNS(以Win10为例)<ul>
+<li>在任务栏右键WLAN图片<br><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/1.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></li>
+<li>打开 <code>网络和Internet 设置</code></li>
+<li>在 <code>高级网络设置</code> 处，点击 <code>更改适配器选项</code><br><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/2.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></li>
+<li>找到连接的网络，右键 <code>属性</code> 或 双击它</li>
+<li>找到ipv4选项<br><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/3.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></li>
+<li>将 <code>自动获得 DNS 服务器地址</code> 修改为 <code>使用下面的 DNS 服务器地址</code></li>
+<li>首选 DNS 服务器 改为 8.8.8.8，备用不填<br><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/DNS-4.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></li>
+<li>修改完成后，点击确定</li>
+</ul>
+</li>
+<li>重置Winsock<ul>
+<li>使用<code>管理员启动</code>，打开命令提示符窗口</li>
+<li>在命令提示符窗口输入<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure></li>
+<li>提示 <code>重置成功</code> 后，重启电脑即可</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>DNS</category>
+      </categories>
+      <tags>
+        <tag>DNS修复</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Github更新项目</title>
     <url>/2023/04/05/Github%E6%9B%B4%E6%96%B0%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<p>可以通过以下步骤将别人仓库的更新同步到自己的仓库中：</p>

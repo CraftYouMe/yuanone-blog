@@ -7,21 +7,16 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="步骤如下：  扫描目标网站  使用dirsearch-master工具对目标网站进行扫描，命令为： 1python3 dirsearch.py -u http:&#x2F;&#x2F;target.com -e php  其中，-u参数指定目标网站的URL，-e参数指定需要扫描的文件类型为php。 扫描结果如下图所示： 可以看到，扫描结果中有一个&#x2F;admin&#x2F;目录。  访问&#x2F;admin&amp;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用Dirsearch和GitHack获取网站源代码">
-<meta property="og:url" content="https://farone.cn/2023/03/13/Web%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-6/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Farone - 不说永远，只说珍惜">
+<meta property="og:url" content="https://farone.cn/categories/DNS/index.html">
 <meta property="og:site_name" content="Farone - 不说永远，只说珍惜">
-<meta property="og:description" content="步骤如下：  扫描目标网站  使用dirsearch-master工具对目标网站进行扫描，命令为： 1python3 dirsearch.py -u http:&#x2F;&#x2F;target.com -e php  其中，-u参数指定目标网站的URL，-e参数指定需要扫描的文件类型为php。 扫描结果如下图所示： 可以看到，扫描结果中有一个&#x2F;admin&#x2F;目录。  访问&#x2F;admin&amp;">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-03-13T20:30:28.000Z">
-<meta property="article:modified_time" content="2023-04-05T07:38:06.351Z">
 <meta property="article:author" content="远一">
-<meta property="article:tag" content="Web课程笔记">
 <meta name="twitter:card" content="summary">
 
 
-<title >使用Dirsearch和GitHack获取网站源代码</title>
+<title >Farone - 不说永远，只说珍惜</title>
 
 <!-- Favicon -->
 
@@ -65,7 +60,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"farone.cn","author":"远一","root":"/","typed_text":["但行好事，莫问前程","天暗下来，你就是光"],"theme_version":"2.0.5","theme":{"switch":false,"default":"auto"},"favicon":{"logo":"/img/apple-touch-icon.png","icon16":"/img/apple-touch-icon.png","icon32":"/img/apple-touch-icon.png","appleTouchIcon":"/img/apple-touch-icon.png","webmanifest":null,"visibilitychange":false,"hidden":"/img/apple-touch-icon.png","showText":null,"hideText":"神里流 霜灭！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"covers":["https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/1.jpeg","https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/4.jpeg","https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/3.jpg","https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/2.jpeg"],"notice_outdate":{"enable":true,"style":"flat","limit_day":30,"position":"top"},"search":{"enable":true,"type":"local","href":"https://www.bing.com/search?q=site:","domain":"farone.cn","path":"search.xml"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-04-05 07:38:06"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2023-04-05 07:38:16"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.5" id="trm-switch-style">
@@ -201,8 +196,7 @@
             <!-- top bar end -->
 
             <!-- body -->
-            
-<div class="trm-content-start">
+            <div class="trm-content-start">
     <!-- banner -->
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
     
@@ -216,15 +210,17 @@
         <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
             <div class="row">
                 
-                <div class="col-lg-12">
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
 
                     <!-- banner title -->
-                    <div class="trm-banner-text trm-text-center ">
+                    <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
-                            NEWS LETTER
+                            The article archive
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            使用Dirsearch和GitHack获取网站源代码
+                            云间连下榻，<br>天上接行杯。
                         </h1>
 
                         
@@ -234,7 +230,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        2023
+                                        categories
                                     </span
                                 ></li>
                             </ul>
@@ -259,118 +255,177 @@
     <div class="container">
         <div class="row">
             
-            <div id="page-content" class="col-lg-12">
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/head.JPG">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        远一
+    </h5>
+    
+        <div class="trm-label">
+            
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/CraftYouMe" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=651446044&website=https://farone.cn" title="QQ" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="https://space.bilibili.com/161802916?spm_id_from=333.1007.0.0" title="BiliBili" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-bimobject"></i>
+        </a>
+    
+        <a href="https://sksir.top" title="Nav" rel="nofollow" target="_blank">
+            <i class="iconfont fas fa-home"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Girl Friend:
+            </div>
+            <div class="trm-label trm-label-light">
+                ThankYY
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                地址:
+            </div>
+            <div class="trm-label trm-label-light">
+                China
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                Forever 18
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:651446044@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
                 <div class="trm-content" id="trm-content">
                     <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
 
-                    <div id="post-info" class="row hidden-sm">
-    <div class="col-sm-4">
-        <div class="trm-card trm-label trm-label-light text-center">
-            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            03/13
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="trm-card trm-label trm-label-light text-center">
-            <i class="iconfont far fa-clock trm-icon"></i><br>
-            20:30
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
-            <i class="iconfont far fa-user trm-icon"></i><br>
-            远一
+                    <div class="row">
+    <div class="col-lg-12">
+        <div class="trm-card">
+            <div style="padding: 0 20px;">
+                
+                    <ul class="row trm-list"><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">（1）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/DNS/">DNS</a><span class="category-list-count">（1）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/Github/">Github</a><span class="category-list-count">（1）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E4%B8%80%E6%AD%A5%E5%88%B0%E4%BD%8D/">一步到位</a><span class="category-list-count">（4）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">基础命令</a><span class="category-list-count">（2）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E5%A5%BD%E7%94%A8%E5%88%86%E4%BA%AB/">好用分享</a><span class="category-list-count">（1）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><span class="category-list-count">（1）</span></li><li class="col-lg-4 trm-list-item " style="margin: 6px 0;"><a class="category-list-link" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">课程笔记</a><span class="category-list-count">（11）</span></li></ul>
+                
+            </div>
         </div>
     </div>
 </div>
-<div class="trm-card ">
-    <article id="article-container" class="trm-publication">
-    <p>步骤如下：</p>
-<ol>
-<li>扫描目标网站</li>
-</ol>
-<p>使用dirsearch-master工具对目标网站进行扫描，命令为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 dirsearch.py -u http://target.com -e php</span><br></pre></td></tr></table></figure>
 
-<p>其中，-u参数指定目标网站的URL，-e参数指定需要扫描的文件类型为php。</p>
-<p>扫描结果如下图所示：</p>
-<p>可以看到，扫描结果中有一个&#x2F;admin&#x2F;目录。</p>
-<ol start="2">
-<li>访问&#x2F;admin&#x2F;目录</li>
-</ol>
-<p>访问<a target="_blank" rel="noopener" href="http://target.com/admin/%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E4%B8%80%E4%B8%AA%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2%E3%80%82">http://target.com/admin/，可以看到一个登陆页面。</a></p>
-<ol start="3">
-<li>使用GitHack-master工具获取源代码</li>
-</ol>
-<p>使用GitHack-master工具获取目标网站的源代码，命令为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 githack.py -u http://target.com/admin/</span><br></pre></td></tr></table></figure>
+<!-- history -->
 
-<p>其中，-u参数指定目标网站的URL。</p>
-<p>获取到的源代码如下图所示：</p>
-<p>可以看到，源代码中有一个config.php文件，里面存储了数据库的用户名和密码。</p>
-<ol start="4">
-<li>获取flag</li>
-</ol>
-<p>使用config.php中的用户名和密码登陆&#x2F;admin&#x2F;目录，可以看到一个flag。</p>
-<p>flag为：flag{e6b1c7a8d2b2a0ee0a29a1f7c8a8a9f9}</p>
-
-</article>
-    
-    
-</div>
-<div id="post-next-prev" class="row">
+<div class="row">
     <div class="col-lg-12">
         <!-- title -->
         <h5 class="trm-title-with-divider">
-            其他文章
-            <span data-number="02"></span>
+            
+                DNS
+            
+            <span data-number="01"></span>
         </h5>
     </div>
-    
-        <div class="col-lg-6">
-    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
-        <div class="trm-older-publication">
+    <div class="col-lg-12">
+        <!-- timeline -->
+        <div class="trm-timeline">
             
-            <a class="trm-op-top trm-anima-link" href="/2023/03/13/Web%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-5/">
-                <span class="trm-op-cover">
-                    <img alt="cover" class="no-fancybox" src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/1.jpeg">
-                </span>
-                <h6 class="trm-op-title">使用dirsearch和bp工具进行渗透测试：目录扫描和弱密码爆破</h6>
-            </a>
-            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>23/03/13</li>
-                <li>20:36</li>
-                <li>课程笔记</li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-    
-        <div class="col-lg-6">
-    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
-        <div class="trm-older-publication">
+            <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
+                <div class="trm-timeline-mark-light"></div>
+                <div class="trm-timeline-mark"></div>
+                <div class="trm-a trm-timeline-content more">
+                    
+                        <div class="trm-card-header">
+                            <div class="trm-left-side">
+                                <h6>
+                                    <a href="/2023/04/05/DNS%E4%B8%8D%E5%8F%AF%E7%94%A8/" class="trm-anima-link">
+                                        DNS不可用解决方案
+                                    </a>
+                                </h6>
+                                <div class="trm-text-sm trm-accent-color trm-mt-15">
+                                    <ul class="trm-card-data trm-label ">
+                                        <li class="trm-accent-color">04/05</li>
+                                        <li class="trm-accent-color">14:11</li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    
+                </div>
+            </div>
             
-            <a class="trm-op-top trm-anima-link" href="/2023/03/13/Web%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0-7/">
-                <span class="trm-op-cover">
-                    <img alt="cover" class="no-fancybox" src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/1.jpeg">
-                </span>
-                <h6 class="trm-op-title">Metasploit框架攻击MS17-010漏洞步骤</h6>
-            </a>
-            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>23/03/13</li>
-                <li>20:27</li>
-                <li>课程笔记</li>
-            </ul>
         </div>
+        <!-- timeline end -->
     </div>
-</div>
-    
 </div>
 
-    
+<!-- history end -->
+
+
+    <div class="trm-pagination">
+        <span class="page-number current">1</span>
+    </div>
+
+
 
 
 
@@ -434,10 +489,6 @@
             <!-- body end -->
 
             <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
-    
-        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
-            <i class="iconfont fas fa-book-reader"></i>
-        </div>
     
     
     <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
@@ -519,10 +570,6 @@
     
 
     <!-- 评论插件 -->
-    
-        
-
-        
     
 
 
