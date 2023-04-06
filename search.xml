@@ -147,8 +147,11 @@
 <p><strong>注意：</strong> 以上命令均为在命令行终端中执行。</p>
 ]]></content>
       <categories>
-        <category>一步到位</category>
+        <category>Hexo</category>
       </categories>
+      <tags>
+        <tag>Hexo 博客创建</tag>
+      </tags>
   </entry>
   <entry>
     <title>课程作业例题</title>
@@ -164,7 +167,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>课程作业例题</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -190,7 +193,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -219,7 +222,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -260,7 +263,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -280,7 +283,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -307,7 +310,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -324,7 +327,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -363,7 +366,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -386,7 +389,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -407,7 +410,7 @@
         <category>课程笔记</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -456,7 +459,7 @@
         <category>一步到位</category>
       </categories>
       <tags>
-        <tag>Web课程笔记</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -508,8 +511,11 @@
 <p>自定义当前工作目录（Current working directory）的路径。</p>
 ]]></content>
       <categories>
-        <category>基础命令</category>
+        <category>Hexo</category>
       </categories>
+      <tags>
+        <tag>Hexo 基础命令</tag>
+      </tags>
   </entry>
   <entry>
     <title>在浙学无人值守刷课</title>
@@ -542,7 +548,7 @@
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>如有不懂，请在留言区留言</p>
 ]]></content>
       <categories>
-        <category>一步到位</category>
+        <category>工具分享</category>
       </categories>
       <tags>
         <tag>大学生刷课</tag>
@@ -637,10 +643,10 @@
 <h2 id="QQ截图识别表格"><a href="#QQ截图识别表格" class="headerlink" title="QQ截图识别表格"></a>QQ截图识别表格</h2><p>QQ截图也能够帮我们把图片转Excel表格，打开表格图片，然后使用QQ截图快捷键「Ctrl + Alt + A」，截取表格中图片，然后点击「屏幕识别」-「转为在线文档」，在在线文档中将表格复制，然后粘贴到我们本地的Excel表格中就OK了。</p>
 ]]></content>
       <categories>
-        <category>好用分享</category>
+        <category>工具分享</category>
       </categories>
       <tags>
-        <tag>资源分享</tag>
+        <tag>图片转表格</tag>
       </tags>
   </entry>
   <entry>
@@ -765,7 +771,10 @@
 <p>然后下面会看到有个 “var cdn_url_1_1” 也有个链接，这也是封面图，这个是按照 1:1 显示的图片。</p>
 ]]></content>
       <categories>
-        <category>一步到位</category>
+        <category>工具分享</category>
       </categories>
+      <tags>
+        <tag>获取推文封面</tag>
+      </tags>
   </entry>
 </search>
