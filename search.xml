@@ -463,6 +463,17 @@
       </tags>
   </entry>
   <entry>
+    <title>关闭bitwarden注册</title>
+    <url>/2023/12/13/bitwarden/</url>
+    <content><![CDATA[<h2 id="关闭bitwarden注册"><a href="#关闭bitwarden注册" class="headerlink" title="关闭bitwarden注册"></a>关闭bitwarden注册</h2><p>如果自己使用，那么就之前注册好账号后，就可以关闭注册功能，甚至关闭网页访问。</p>
+<p>修改前需要先停掉bitwarden_rs</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /root/data/docker_data/vaultwarden</span><br><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
+
+<p>然后修改docker-compose.yml 文件<br>将SIGNUPS_ALLOWED: “true” 改成 SIGNUPS_ALLOWED: “false” ，则关闭注册功能。</p>
+<p>最后在通过命令docker-compose up -d 重新启动服务。</p>
+<h2 id="bitwarden-rs升级"><a href="#bitwarden-rs升级" class="headerlink" title="bitwarden_rs升级"></a>bitwarden_rs升级</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /root/data/docker_data/vaultwarden</span><br><span class="line">docker-compose down</span><br><span class="line">docker pull bitwardenrs/server:latest</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>Hexo 基础命令</title>
     <url>/2023/03/17/hexo%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<blockquote>
