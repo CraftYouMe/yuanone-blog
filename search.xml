@@ -154,6 +154,13 @@
       </tags>
   </entry>
   <entry>
+    <title>VPN污染DNS导致git无法push仓库</title>
+    <url>/2023/12/15/VPN%E6%B1%A1%E6%9F%93DNS%E5%AF%BC%E8%87%B4git%E6%97%A0%E6%B3%95push%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[<p>使用了VPN连接本地的服务器或者本地的代码仓库，即使重新配置了 ssH 的 key 后执行 git pull 或 git push 命令时依然不<br>能拉取和提交代码，这时需要考虑是不是本地的hosts文件中没有配置IP地址和主机名的映射关系导致本地 DNs 无法解析出现该问<br>题;</p>
+<p>找到hosts的文件c:\Windows\System32\drivers\etc，以管理员方式打开该文件，如果安装了vscode，建议通过 vscode 打开，方便<br>保存，或者以管理员身份打开，以10.0.0.8举例，这里以代码仓库地址是10.0.0.8为例，只需要配置 IP和域名后（以管理员权<br>限）保存即可：</p>
+]]></content>
+  </entry>
+  <entry>
     <title>课程作业例题</title>
     <url>/2023/03/07/Web%E8%AF%BE%E7%A8%8B%E4%BE%8B%E9%A2%98/</url>
     <content><![CDATA[<h2 id="一、课堂作业（80分）"><a href="#一、课堂作业（80分）" class="headerlink" title="一、课堂作业（80分）"></a>一、课堂作业（80分）</h2><h3 id="作业一-DVWA-CSRF-Low-漏洞利用【20分】"><a href="#作业一-DVWA-CSRF-Low-漏洞利用【20分】" class="headerlink" title="作业一 DVWA CSRF Low 漏洞利用【20分】"></a>作业一 DVWA CSRF Low 漏洞利用【20分】</h3><p>完成DVWA CSRF Low 漏洞利用，描述关键文字及截图证明过程及结果。</p>
