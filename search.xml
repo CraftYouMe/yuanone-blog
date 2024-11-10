@@ -909,4 +909,53 @@ include conf.d/include/proxy.conf;
         <category>系统</category>
       </categories>
   </entry>
+  <entry>
+    <title>时代·锦悦园人脸录入教程</title>
+    <url>/2024/11/10/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B8%E5%BD%95%E5%85%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>在建立自己的个人博客网站时，Hexo 是一个非常流行且易于使用的静态网站生成器。通过 Hexo，您可以使用 Markdown 等简单语言编写文章，并将其转换为漂亮的静态网页。为了更好地管理和分享您的博客内容，Git 是一个必需的工具之一。此外，安装 Node.js 运行环境也是使用 Hexo 的前提条件。在本文中，我们将介绍如何在计算机上首次创建 Hexo 博客网站，并配置 Git 和 Node.js 环境。</p>
+</blockquote>
+<h2 id="人脸录入和账号开通"><a href="#人脸录入和账号开通" class="headerlink" title="人脸录入和账号开通"></a>人脸录入和账号开通</h2><ol>
+<li>扫描二维码<br>扫描业主群发送的二维码，进入“锦悦园人脸识别系统”页面。</li>
+</ol>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B81.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ol start="2">
+<li>填写信息<br>在此页面填写您的姓名以及手机号，姓名务必填写真实姓名。获取验证码后点击 <strong>下一步</strong>。</li>
+</ol>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B82.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ol start="3">
+<li>录入人脸以及房屋信息<br>录入人脸信息，确保四周无遮挡物等，正确填写房屋信息以及所属身份</li>
+</ol>
+<ul>
+<li>   业主：房屋管理员，可以随意添加&#x2F;删除人员</li>
+<li>   家属：只能录入自身人脸信息</li>
+</ul>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B83.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ol start="4">
+<li>提交审核<br>提交后预计5-10分钟完成审核。审核通过后，请下载安装 <strong>“海康互联”</strong> App（或通过“海康互联”微信小程序使用，<code>注意：小程序可能不具备所有功能</code>）。</li>
+</ol>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B84.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ol start="5">
+<li>完成账号激活<br>打开“海康互联”App，使用注册时填写的手机号登录。<br>点击互联页面右侧的小三角，切换团队至“时代锦悦园”，完成账号激活。<br>以上步骤完成后，您的个人账号和人脸信息已成功录入系统。</li>
+</ol>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B85.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B86.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="家属人脸录入"><a href="#家属人脸录入" class="headerlink" title="家属人脸录入"></a>家属人脸录入</h2><ol>
+<li>进入我的房屋<br>打开首页，找到 <strong>“我的房屋”</strong> 。</li>
+</ol>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B88.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ol start="2">
+<li>进入我的楼栋<br>进入房屋所在的楼栋</li>
+</ol>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B89.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ol start="3">
+<li>添加家属人脸或账号<br>在页面下方添加或删除家属人脸信息。</li>
+</ol>
+<p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B810.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p><strong>注意：</strong> 若在 “我的房屋” 页面无法进行操作，请联系物业处理。</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
 </search>
