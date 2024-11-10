@@ -912,10 +912,7 @@ include conf.d/include/proxy.conf;
   <entry>
     <title>时代·锦悦园人脸录入教程</title>
     <url>/2024/11/10/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B8%E5%BD%95%E5%85%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>在建立自己的个人博客网站时，Hexo 是一个非常流行且易于使用的静态网站生成器。通过 Hexo，您可以使用 Markdown 等简单语言编写文章，并将其转换为漂亮的静态网页。为了更好地管理和分享您的博客内容，Git 是一个必需的工具之一。此外，安装 Node.js 运行环境也是使用 Hexo 的前提条件。在本文中，我们将介绍如何在计算机上首次创建 Hexo 博客网站，并配置 Git 和 Node.js 环境。</p>
-</blockquote>
-<h2 id="人脸录入和账号开通"><a href="#人脸录入和账号开通" class="headerlink" title="人脸录入和账号开通"></a>人脸录入和账号开通</h2><ol>
+    <content><![CDATA[<h2 id="人脸录入和账号开通"><a href="#人脸录入和账号开通" class="headerlink" title="人脸录入和账号开通"></a>人脸录入和账号开通</h2><ol>
 <li>扫描二维码<br>扫描业主群发送的二维码，进入“锦悦园人脸识别系统”页面。</li>
 </ol>
 <p><img src="https://yuanone-blog-picture.oss-cn-beijing.aliyuncs.com/img/%E9%94%A6%E6%82%A6%E5%9B%AD%E4%BA%BA%E8%84%B81.jpg" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
